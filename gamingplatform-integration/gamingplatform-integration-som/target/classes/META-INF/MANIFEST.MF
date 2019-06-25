@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Implementation-Title: gamingplatform-integration-som
+Implementation-Version: 1.0
+Built-By: ext02d9773
+Implementation-Vendor-Id: com.turkcell.playcell
+Build-Jdk: 1.8.0_211
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/gamingplatform/gamingplatform-integration/gamingpla
+ tform-integration-som
+Created-By: Maven Integration for Eclipse
+

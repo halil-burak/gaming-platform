@@ -1,0 +1,36 @@
+/target/
+/gamingplatform-api/target/
+/gamingplatform-common/target/
+/gamingplatform-integration/target/
+/gamingplatform-integration/gamingplatform-integration-mobileconnect/target/
+/gamingplatform-integration/gamingplatform-integration-som/target/
+
+!.mvn/wrapper/maven-wrapper.jar
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+.DS_Store
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/build/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### Logs ###
+/logs/

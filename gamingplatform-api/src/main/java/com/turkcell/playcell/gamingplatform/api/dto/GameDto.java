@@ -21,7 +21,7 @@ public class GameDto implements Serializable {
 
     private String name;
 
-    private boolean isBlockLink;
+    private boolean hideOnCategories;
 
     private int subscription;
 
@@ -57,12 +57,12 @@ public class GameDto implements Serializable {
         this.name = name;
     }
 
-    public boolean isBlockLink() {
-        return isBlockLink;
+    public boolean isHideOnCategories() {
+        return hideOnCategories;
     }
 
-    public void setBlockLink(boolean blockLink) {
-        isBlockLink = blockLink;
+    public void setHideOnCategories(boolean hideOnCategories) {
+        this.hideOnCategories = hideOnCategories;
     }
 
     public int getSubscription() {

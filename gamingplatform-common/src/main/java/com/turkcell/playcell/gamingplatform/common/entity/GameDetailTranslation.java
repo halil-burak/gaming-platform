@@ -1,29 +1,16 @@
 package com.turkcell.playcell.gamingplatform.common.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-
 import javax.persistence.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
-@Setter
-@RequiredArgsConstructor
-@AllArgsConstructor
 @Entity
 public class GameDetailTranslation extends BaseEntity{
 
     @Column(name = "NAME")
     private String name;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "GAME_DETAIL_TRANSLATION_ID")
     private List<GameSlug> gameSlugs = new ArrayList<>();
 
@@ -32,7 +19,6 @@ public class GameDetailTranslation extends BaseEntity{
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "GAME_DETAIL_ID")
-    @JsonIgnore
     private GameDetail gameDetail;
 
     @ManyToOne
@@ -45,12 +31,68 @@ public class GameDetailTranslation extends BaseEntity{
             inverseJoinColumns = @JoinColumn(name = "IMAGE_ID"))
     private List<Image> images = new ArrayList<>();
 
-    public void addGameSlug(GameSlug gameSlug1) {
-        this.getGameSlugs().add(gameSlug1);
+    public void addGameSlug(GameSlug gameSlug) {
+        gameSlug.setGameDetailTranslation(this);
+        this.getGameSlugs().add(gameSlug);
     }
 
-    public void removeGameSlug(GameSlug gameSlug1) {
-        this.getGameSlugs().remove(gameSlug1);
+    public void removeGameSlug(GameSlug gameSlug) {
+        gameSlug.setGameDetailTranslation(null);
+        this.getGameSlugs().remove(gameSlug);
     }
-    
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Language getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(Language language) {
+        this.language = language;
+    }
+
+    public GameDetail getGameDetail() {
+        return gameDetail;
+    }
+
+    public void setGameDetail(GameDetail gameDetail) {
+        this.gameDetail = gameDetail;
+    }
+
+    public List<Image> getImages() {
+        return images;
+    }
+
+    public void setImages(List<Image> images) {
+        this.images = images;
+    }
+
+    public List<GameSlug> getGameSlugs() {
+        return gameSlugs;
+    }
+
+    @Override
+    public String toString() {
+        return "GameDetailTranslation{" +
+                "name='" + name + '\'' +
+                //", gameSlugs=" + gameSlugs +
+                ", description='" + description + '\'' +
+                //", gameDetailId=" + gameDetail.getId() +
+                ", languageId=" + language.getId() +
+                '}';
+    }
 }

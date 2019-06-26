@@ -1,27 +1,9 @@
 package com.turkcell.playcell.gamingplatform.common.entity;
 
+
+import javax.persistence.*;
 import java.time.Instant;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
-
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-
-
-@Getter
-@Setter
-@Builder
-@RequiredArgsConstructor
-@AllArgsConstructor
 @MappedSuperclass
 public class BaseEntity {
 
@@ -43,12 +25,63 @@ public class BaseEntity {
 
     @PrePersist
     protected void onCreate() {
-        this.createdDate = Instant.now();
+//        this.createdDate = Instant.now();
+//        try{
+//            UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//            this.LastModifiedBy = userDetails.getUsername();
+//        }catch(RuntimeException e) {
+//            this.LastModifiedBy = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+//        }
     }
 
     @PreUpdate
     protected void onUpdate() {
-        this.lastModifiedDate = Instant.now();
+//        this.lastModifiedDate = Instant.now();
+//        try{
+//            UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//            this.LastModifiedBy = userDetails.getUsername();
+//        }catch(RuntimeException e) {
+//            this.LastModifiedBy = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+//        }
     }
-    
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public Instant getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Instant createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public String getLastModifiedBy() {
+        return LastModifiedBy;
+    }
+
+    public void setLastModifiedBy(String lastModifiedBy) {
+        LastModifiedBy = lastModifiedBy;
+    }
+
+    public Instant getLastModifiedDate() {
+        return lastModifiedDate;
+    }
+
+    public void setLastModifiedDate(Instant lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
+    }
 }

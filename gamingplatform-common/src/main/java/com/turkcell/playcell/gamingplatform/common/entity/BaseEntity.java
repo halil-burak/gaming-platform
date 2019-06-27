@@ -25,7 +25,7 @@ public class BaseEntity {
 
     @PrePersist
     protected void onCreate() {
-//        this.createdDate = Instant.now();
+        this.createdDate = Instant.now();
 //        try{
 //            UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 //            this.LastModifiedBy = userDetails.getUsername();
@@ -36,7 +36,7 @@ public class BaseEntity {
 
     @PreUpdate
     protected void onUpdate() {
-//        this.lastModifiedDate = Instant.now();
+        this.lastModifiedDate = Instant.now();
 //        try{
 //            UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 //            this.LastModifiedBy = userDetails.getUsername();

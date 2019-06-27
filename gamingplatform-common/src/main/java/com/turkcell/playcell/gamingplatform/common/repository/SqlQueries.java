@@ -12,5 +12,6 @@ public class SqlQueries {
             "JOIN gd.tariffs t WHERE p.id=:platformId and t.id=:tariffId";
     public final static String FIND_LATEST_GAME_SLUG = "SELECT gs.url FROM Game_Slug gs WHERE gs.game_detail_translation_id=?1 ORDER BY gs.create_date DESC LIMIT 1 ";
     public final static String FIND_GAME_URL = "SELECT g FROM Game g INNER JOIN g.gameDetails gd INNER JOIN gd.gameDetailTranslations gdt INNER JOIN gdt.gameSlugs gs " +
-            "WHERE lower(gd.platform.name) = lower(:platformName) AND lower(gdt.language.shortName) = lower(:languageName) AND lower(gs.url) = lower(:url)";
+            "WHERE lower(gd.platform.name) = lower(:platformName) AND lower(gdt.language.shortName) = lower(:languageName) AND lower(gs.url) = lower(:url)" +
+            "AND gd.platform.id = gs.platformId AND gdt.language.id = gs.languageId";
 }

@@ -173,13 +173,11 @@ public class GameService implements IGameService {
     public GameUrlDto getGame(String userTariff, String platformName, String slug, String language) {
     	
     	try {
-    		List<Game> games = gameRepository.findGameUrl(platformName, language, slug);
+    		Game game = gameRepository.findGameUrl(platformName, language, slug);
             
-            if(ObjectUtils.isEmpty(games)){
+            if(game == null ){
                 return null;
             }
-            
-            Game game = games.get(0);
             
             GameUrlDto gameUrlDTO = new GameUrlDto();
             gameUrlDTO.setId(game.getId());

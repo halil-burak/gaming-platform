@@ -1,6 +1,14 @@
 /target/
+<<<<<<< HEAD
 gamingplatform-common/target/
 gamingplatform-api/target/
+=======
+/gamingplatform-api/target/
+/gamingplatform-common/target/
+/gamingplatform-integration/target/
+/gamingplatform-integration/gamingplatform-integration-mobileconnect/target/
+/gamingplatform-integration/gamingplatform-integration-som/target/
+>>>>>>> 896c9c67b17dcb140768daba72d17ecbbf6ae3ed
 
 !.mvn/wrapper/maven-wrapper.jar
 
@@ -30,4 +38,8 @@ gamingplatform-api/target/
 /.nb-gradle/
 
 ### Logs ###
+<<<<<<< HEAD
 /log
+=======
+/logs/
+>>>>>>> 896c9c67b17dcb140768daba72d17ecbbf6ae3ed

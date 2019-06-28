@@ -1,26 +1,11 @@
 package com.turkcell.playcell.gamingplatform.common.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
-@Setter
-@RequiredArgsConstructor
-@AllArgsConstructor
 @Entity
 public class Platform extends BaseEntity {
 
@@ -29,26 +14,85 @@ public class Platform extends BaseEntity {
     private String name;
 
     @ManyToMany(mappedBy = "platforms")
-    @JsonIgnore
     List<Category> categories = new ArrayList<>();
 
     @ManyToMany(mappedBy = "platforms")
-    @JsonIgnore
     List<Language> languages = new ArrayList<>();
+
+    @ManyToOne
+    @JoinColumn(name = "FTP_ACCOUNT_ID")
+    private FtpAccount ftpAccount;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy ="platform", orphanRemoval = true)
+    private List<PlatformTranslation> platformTranslations = new ArrayList<>();
+
+    @OneToOne
+    @JoinColumn(name = "IMAGE_ID")
+    private Image logo;
+
+    @OneToMany(fetch= FetchType.LAZY)
+    @JoinColumn(name = "PLATFORM_ID")
+    private List<CategoryIcon> categoryIcons = new ArrayList<>();
+
+    public Platform() { }
 
     public Platform(Long id) {
         super.setId(id);
     }
 
-    /*@Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Platform)) return false;
-        return super.getId() != null && getId().equals(((Platform) o).getId());
+    public String getName() {
+        return name;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(name);
-    }*/
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
+    }
+
+    public List<Language> getLanguages() {
+        return languages;
+    }
+
+    public void setLanguages(List<Language> languages) {
+        this.languages = languages;
+    }
+
+    public FtpAccount getFtpAccount() {
+        return ftpAccount;
+    }
+
+    public void setFtpAccount(FtpAccount ftpAccount) {
+        this.ftpAccount = ftpAccount;
+    }
+
+    public List<PlatformTranslation> getPlatformTranslations() {
+        return platformTranslations;
+    }
+
+    public void addPlatformTranslation(PlatformTranslation platformTranslation) {
+        this.getPlatformTranslations().add(platformTranslation);
+    }
+
+    public void removePlatformTranslation(PlatformTranslation platformTranslation) {
+        this.getPlatformTranslations().remove(platformTranslation);
+    }
+
+    public Image getLogo() {
+        return logo;
+    }
+
+    public List<CategoryIcon> getCategoryIcons() {
+        return categoryIcons;
+    }
+
+    public void setLogo(Image logo) {
+        this.logo = logo;
+    }
 }

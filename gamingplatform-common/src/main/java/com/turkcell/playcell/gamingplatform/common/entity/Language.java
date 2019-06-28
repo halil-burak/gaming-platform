@@ -1,21 +1,9 @@
 package com.turkcell.playcell.gamingplatform.common.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
-@Setter
-@RequiredArgsConstructor
 @Entity
 public class Language extends BaseEntity{
 
@@ -25,11 +13,58 @@ public class Language extends BaseEntity{
     @Column(name = "SHORT_NAME", unique = true)
     private String shortName;
 
-    @ManyToMany(cascade = CascadeType.MERGE)
+    @ManyToMany
     @JoinTable(name = "PLATFORM_LANGUAGE",
             joinColumns = { @JoinColumn(name = "LANGUAGE_ID", referencedColumnName = "ID") },
             inverseJoinColumns = { @JoinColumn(name = "PLATFORM_ID", referencedColumnName = "ID") })
-    @JsonIgnore
     private List<Platform> platforms = new ArrayList<>();
-    
+
+//    @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true)
+//    @JoinColumn(name = "PLATFORM_ID")
+//    private List<GameSlug> gameSlugs = new ArrayList<>();
+
+    public Language() {
+    }
+
+    public Language(Long id) {
+        super.setId(id);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getShortName() {
+        return shortName;
+    }
+
+    public void setShortName(String shortName) {
+        this.shortName = shortName;
+    }
+
+
+    public List<Platform> getPlatforms() {
+        return platforms;
+    }
+
+    public void setPlatforms(List<Platform> platforms) {
+        this.platforms = platforms;
+    }
+
+//    public List<GameSlug> getGameSlugs() {
+//        return gameSlugs;
+//    }
+
+    @Override
+    public String toString() {
+        return "Language{" +
+                "name='" + name + '\'' +
+                ", shortName='" + shortName + '\'' +
+                //", platforms=" + platforms +
+                '}';
+    }
 }

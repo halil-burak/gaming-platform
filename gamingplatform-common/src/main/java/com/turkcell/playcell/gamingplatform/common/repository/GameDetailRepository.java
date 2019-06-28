@@ -10,6 +10,7 @@ import com.turkcell.playcell.gamingplatform.common.entity.GameDetail;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface GameDetailRepository extends JpaRepository<GameDetail, Long> {
@@ -17,6 +18,8 @@ public interface GameDetailRepository extends JpaRepository<GameDetail, Long> {
     List<GameDetail> findByPlatformId(Long platformId);
 
     List<GameDetail> findByPlatformNameEqualsIgnoreCaseAndGameIdAndIsActiveTrue(String platformName, Long gameId);
+
+    Optional<GameDetail> findByPlatformNameEqualsIgnoreCaseAndGameId(String platformName, Long gameId);
 
     @Query(value = SqlQueries.FIND_GAME_BY_PLATFORM_NAME_AND_LANGUAGE)
     List<Game> findGameByPlatformName(@Param("platformName") String platformName, @Param("language") String language, @Param("datetime")Instant datetime);

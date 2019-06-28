@@ -1,33 +1,63 @@
 package com.turkcell.playcell.gamingplatform.common.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-@Getter
-@Setter
-@RequiredArgsConstructor
-@AllArgsConstructor
 @Entity
-@Table(uniqueConstraints = @UniqueConstraint(columnNames={"URL", "GAME_DETAIL_TRANSLATION_ID"}))
+@Table(uniqueConstraints={@UniqueConstraint(columnNames = {"URL" , "PLATFORM_ID", "LANGUAGE_ID"})})
 public class GameSlug extends BaseEntity {
-    
-	@Column(name = "URL")
+
     @NotNull
     @NotEmpty
+    @Column(name = "URL")
     private String url;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "GAME_DETAIL_TRANSLATION_ID")
-    @JsonIgnore
     private GameDetailTranslation gameDetailTranslation;
 
+    // added for unique constraint
+    @Column(name = "PLATFORM_ID")
+    private Long platformId;
+    @Column(name = "LANGUAGE_ID")
+    private Long languageId;
+
+    public GameSlug() { }
+
+    public GameSlug(@NotNull @NotEmpty String url) {
+        this.url = url;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public GameDetailTranslation getGameDetailTranslation() {
+        return gameDetailTranslation;
+    }
+
+    public void setGameDetailTranslation(GameDetailTranslation gameDetailTranslation) {
+        this.gameDetailTranslation = gameDetailTranslation;
+        if(gameDetailTranslation == null) {
+            this.platformId = null;
+            this.languageId = null;
+        }else {
+            this.platformId = gameDetailTranslation.getGameDetail().getPlatform().getId();
+            this.languageId = gameDetailTranslation.getLanguage().getId();
+        }
+
+    }
+
+    @Override
+    public String toString() {
+        return "GameSlug{" +
+                "url='" + url + '\'' +
+                //", gameDetailTranslationId=" + gameDetailTranslation.getId() +
+                '}';
+    }
 }

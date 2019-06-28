@@ -74,7 +74,7 @@ public class GameService implements IGameService {
             
             gameDTO.setId(game.getId());
             gameDTO.setName(game.getName());
-            gameDTO.setBlockLink(game.isBlockLink());
+            gameDTO.setHideOnCategories(game.isHideOnCategories());
             gameDTO.setScore(game.getScore());
             
             List<GameDetail> gameDetails = gameDetailRepository.findByPlatformNameEqualsIgnoreCaseAndGameIdAndIsActiveTrue(platformName, game.getId());

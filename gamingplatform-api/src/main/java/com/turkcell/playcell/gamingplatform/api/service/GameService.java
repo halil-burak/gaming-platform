@@ -11,10 +11,11 @@ import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
+import com.turkcell.playcell.gamingplatform.api.config.ApplicationProperties;
+import com.turkcell.playcell.gamingplatform.api.util.GenerateTicket;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ObjectUtils;
 
 import com.turkcell.playcell.gamingplatform.api.dto.CategoryDto;
 import com.turkcell.playcell.gamingplatform.api.dto.GameDto;
@@ -62,6 +63,9 @@ public class GameService implements IGameService {
 
     @Autowired
     private CategorySlugRepository categorySlugRepository;
+
+    @Autowired
+    private ApplicationProperties applicationProperties;
 
     @Cacheable(value = "games", key = "{ #platformName, #language }")
     public GameResponse getGamesByPlatformAndLanguage(String platformName, String language) {
@@ -174,10 +178,7 @@ public class GameService implements IGameService {
     	
     	try {
     		Game game = gameRepository.findGameUrl(platformName, language, slug);
-            
-            if(game == null ){
-                return null;
-            }
+            if(game == null ){ return null; }
             
             GameUrlDto gameUrlDTO = new GameUrlDto();
             gameUrlDTO.setId(game.getId());
@@ -190,7 +191,11 @@ public class GameService implements IGameService {
             gameUrlDTO.setDefaultSlug(gameDetailTranslation.getGameSlugs().get(0).getUrl());
             
             if(gameDetail.getTariffs().size() == 0 || gameDetail.getTariffs().stream().filter(t -> t.getName().equalsIgnoreCase(userTariff)).findFirst().isPresent()){
-                gameUrlDTO.setUrl(game.getUrl());
+                if(game.getGameFile() != null){
+                    String urlWithToken = GenerateTicket.CreateStaticTicket(game.getUrl(),3600, applicationProperties.getCdnPrivateKey());
+                    gameUrlDTO.setUrl(urlWithToken);
+                }
+
             }
             
             return gameUrlDTO;

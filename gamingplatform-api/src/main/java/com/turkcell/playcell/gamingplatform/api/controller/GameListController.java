@@ -83,12 +83,12 @@ public class GameListController extends BaseController {
 				return new ResponseEntity<>(response, HttpStatus.OK);
 			}
 		        
-			DataResponse<Object> response = DataResponse.createResponse(gameUrlDTO, true, ResponseCodeStrings.GAME_LIST_SUCCESS, "Game List Succesfully Provided.");
+			DataResponse<Object> response = DataResponse.createResponse(gameUrlDTO, true, ResponseCodeStrings.SUCCESS, "Game List Succesfully Provided.");
 			return new ResponseEntity<>(response, HttpStatus.OK);
 			
     	} catch(Exception ex) {
     		log.error("An exception occurred during getGame API call... -> {}", ex);
-            return new ResponseEntity<>("Error", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
     	}
     }
     
@@ -103,10 +103,10 @@ public class GameListController extends BaseController {
             gameResponse = gameService.getGamesByPlatformAndLanguage(pName, language);
         } catch (Exception ex) {
             log.error("An error occurred during getGameList API... -> {}", ex);
-            return new ResponseEntity<>("Error", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
         
-        DataResponse<Object> response = DataResponse.createResponse(gameResponse, true, ResponseCodeStrings.GAME_LIST_SUCCESS, pName + " Platform Game List Successfully Provided.");
+        DataResponse<Object> response = DataResponse.createResponse(gameResponse, true, ResponseCodeStrings.SUCCESS, pName + " Platform Game List Successfully Provided.");
 		return new ResponseEntity<>(response, HttpStatus.OK);
     }
 

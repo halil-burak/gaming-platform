@@ -181,7 +181,7 @@ public class UserApiController extends BaseController {
 	                tariffDTO = new TariffDto("Free", 0, "Free", "Free", 0L, 0L);
 	            }
 	            
-	            DataResponse<TariffDto> response = DataResponse.createResponse(tariffDTO, true, ResponseCodeStrings.PACKAGE_QUERY_SUCCESS, "Package Query is successfully done.");
+	            DataResponse<TariffDto> response = DataResponse.createResponse(tariffDTO, true, ResponseCodeStrings.SUCCESS, "Package Query is successfully done.");
 	            log.info("Package Query successfully done for " + msisdn);
 	            return new ResponseEntity<Object>(response, HttpStatus.OK);
 		    }

@@ -1962,7 +1962,7 @@ Caused by: java.lang.IllegalArgumentException: DefaultSerializer requires a Seri
 2019-06-21 15:22:58.103 [nio-8092-exec-1][INFO ][KqueueProvider           ] - [TCD9773777  ] -  [user:] : Starting without optional kqueue library
 2019-06-21 15:23:01.715 [nio-8092-exec-1][ERROR][GameListController       ] - [TCD9773777  ] -  [user:] : An error occurred during getGameList API call... -> {}
 
-org.springframework.data.redis.serializer.SerializationException: Cannot serialize; nested exception is org.springframework.core.serializer.support.SerializationFailedException: Failed to serialize object using DefaultSerializer; nested exception is java.io.NotSerializableException: com.turkcell.playcell.gamingplatform.api.dto.CategoryDto
+org.springframework.data.redis.serializer.SerializationException: Cannot serialize; nested exception is org.springframework.core.serializer.support.SerializationFailedException: Failed to serialize object using DefaultSerializer; nested exception is java.io.NotSerializableException: com.turkcell.playcell.gamingplatform.api.dto.CategoryDTO
 	at org.springframework.data.redis.serializer.JdkSerializationRedisSerializer.serialize(JdkSerializationRedisSerializer.java:96)
 	at org.springframework.data.redis.serializer.DefaultRedisElementWriter.write(DefaultRedisElementWriter.java:43)
 	at org.springframework.data.redis.serializer.RedisSerializationContext$SerializationPair.write(RedisSerializationContext.java:241)
@@ -2041,12 +2041,12 @@ org.springframework.data.redis.serializer.SerializationException: Cannot seriali
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.lang.Thread.run(Thread.java:748)
-Caused by: org.springframework.core.serializer.support.SerializationFailedException: Failed to serialize object using DefaultSerializer; nested exception is java.io.NotSerializableException: com.turkcell.playcell.gamingplatform.api.dto.CategoryDto
+Caused by: org.springframework.core.serializer.support.SerializationFailedException: Failed to serialize object using DefaultSerializer; nested exception is java.io.NotSerializableException: com.turkcell.playcell.gamingplatform.api.dto.CategoryDTO
 	at org.springframework.core.serializer.support.SerializingConverter.convert(SerializingConverter.java:68)
 	at org.springframework.core.serializer.support.SerializingConverter.convert(SerializingConverter.java:35)
 	at org.springframework.data.redis.serializer.JdkSerializationRedisSerializer.serialize(JdkSerializationRedisSerializer.java:94)
 	... 77 common frames omitted
-Caused by: java.io.NotSerializableException: com.turkcell.playcell.gamingplatform.api.dto.CategoryDto
+Caused by: java.io.NotSerializableException: com.turkcell.playcell.gamingplatform.api.dto.CategoryDTO
 	at java.io.ObjectOutputStream.writeObject0(ObjectOutputStream.java:1184)
 	at java.io.ObjectOutputStream.writeObject(ObjectOutputStream.java:348)
 	at java.util.ArrayList.writeObject(ArrayList.java:766)
@@ -2113,7 +2113,7 @@ Caused by: java.io.NotSerializableException: com.turkcell.playcell.gamingplatfor
 2019-06-21 15:24:26.226 [nio-8092-exec-2][INFO ][KqueueProvider           ] - [TCD9773777  ] -  [user:] : Starting without optional kqueue library
 2019-06-21 15:24:28.961 [nio-8092-exec-2][ERROR][GameListController       ] - [TCD9773777  ] -  [user:] : An error occurred during getGameList API call... -> {}
 
-org.springframework.data.redis.serializer.SerializationException: Cannot serialize; nested exception is org.springframework.core.serializer.support.SerializationFailedException: Failed to serialize object using DefaultSerializer; nested exception is java.io.NotSerializableException: com.turkcell.playcell.gamingplatform.api.dto.GameDto
+org.springframework.data.redis.serializer.SerializationException: Cannot serialize; nested exception is org.springframework.core.serializer.support.SerializationFailedException: Failed to serialize object using DefaultSerializer; nested exception is java.io.NotSerializableException: com.turkcell.playcell.gamingplatform.api.dto.GameDTO
 	at org.springframework.data.redis.serializer.JdkSerializationRedisSerializer.serialize(JdkSerializationRedisSerializer.java:96)
 	at org.springframework.data.redis.serializer.DefaultRedisElementWriter.write(DefaultRedisElementWriter.java:43)
 	at org.springframework.data.redis.serializer.RedisSerializationContext$SerializationPair.write(RedisSerializationContext.java:241)
@@ -2192,12 +2192,12 @@ org.springframework.data.redis.serializer.SerializationException: Cannot seriali
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.lang.Thread.run(Thread.java:748)
-Caused by: org.springframework.core.serializer.support.SerializationFailedException: Failed to serialize object using DefaultSerializer; nested exception is java.io.NotSerializableException: com.turkcell.playcell.gamingplatform.api.dto.GameDto
+Caused by: org.springframework.core.serializer.support.SerializationFailedException: Failed to serialize object using DefaultSerializer; nested exception is java.io.NotSerializableException: com.turkcell.playcell.gamingplatform.api.dto.GameDTO
 	at org.springframework.core.serializer.support.SerializingConverter.convert(SerializingConverter.java:68)
 	at org.springframework.core.serializer.support.SerializingConverter.convert(SerializingConverter.java:35)
 	at org.springframework.data.redis.serializer.JdkSerializationRedisSerializer.serialize(JdkSerializationRedisSerializer.java:94)
 	... 77 common frames omitted
-Caused by: java.io.NotSerializableException: com.turkcell.playcell.gamingplatform.api.dto.GameDto
+Caused by: java.io.NotSerializableException: com.turkcell.playcell.gamingplatform.api.dto.GameDTO
 	at java.io.ObjectOutputStream.writeObject0(ObjectOutputStream.java:1184)
 	at java.io.ObjectOutputStream.writeObject(ObjectOutputStream.java:348)
 	at java.util.ArrayList.writeObject(ArrayList.java:766)

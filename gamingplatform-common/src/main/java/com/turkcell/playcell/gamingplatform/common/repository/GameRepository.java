@@ -16,7 +16,6 @@ public interface GameRepository extends JpaRepository<Game, Long> {
 
     @Query(value = SqlQueries.FIND_GAME_URL)
     Game findGameUrl(String platformName, String languageName, String url);
-
 }
 
 

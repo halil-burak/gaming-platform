@@ -11,14 +11,9 @@ import lombok.RequiredArgsConstructor;
 @Builder
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class GameUrlDto implements Serializable {
-	
-    /**
-	 * 
-	 */
+public class GameUrlDTO implements Serializable {
 	private static final long serialVersionUID = -3138966567084849583L;
 	private Long id;
     private String url;
     private String defaultSlug;
-    
 }

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.turkcell.playcell.gamingplatform.api.config.ApplicationProperties;
-import com.turkcell.playcell.gamingplatform.api.dto.GameUrlDto;
+import com.turkcell.playcell.gamingplatform.api.dto.GameUrlDTO;
 import com.turkcell.playcell.gamingplatform.api.enumtypes.ResponseCodeStrings;
 import com.turkcell.playcell.gamingplatform.api.response.DataResponse;
 import com.turkcell.playcell.gamingplatform.api.service.GameResponse;
@@ -45,7 +45,7 @@ public class GameListController extends BaseController {
     		
 	    	/*String msisdn = super.getPhoneNumber(request);
 	    	
-			if (!super.CheckMsisdnFormat(msisdn)) {
+			if (!super.checkMsisdnFormat(msisdn)) {
 				DataResponse<?> response = DataResponse.createResponse(null, false, ResponseCodeStrings.MSISDN_FORMAT_ERROR, "MSISDN Format Check Failed");
 				return new ResponseEntity<> (response, HttpStatus.BAD_REQUEST);
 			}*/
@@ -67,7 +67,7 @@ public class GameListController extends BaseController {
 				userTariff = subscriptionInfoService.getSubscriptionInfo(msisdn, tempToken);
 			}
 		        
-			GameUrlDto gameUrlDTO = gameService.getGame(userTariff, platformName, slug, language);
+			GameUrlDTO gameUrlDTO = gameService.getGame(userTariff, platformName, slug, language);
 				
 			if (ObjectUtils.isEmpty(gameUrlDTO.getUrl())) {
 					

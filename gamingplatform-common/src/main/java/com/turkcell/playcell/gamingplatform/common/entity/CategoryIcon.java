@@ -1,12 +1,17 @@
 package com.turkcell.playcell.gamingplatform.common.entity;
 
+import lombok.*;
+
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import java.io.Serializable;
 
 @Entity
-public class CategoryIcon extends BaseEntity {
+@NoArgsConstructor
+@Data
+public class CategoryIcon extends BaseEntity implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "PLATFORM_ID")
@@ -19,28 +24,4 @@ public class CategoryIcon extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "CATEGORY_ID")
     private Category category;
-
-    public Platform getPlatform() {
-        return platform;
-    }
-
-    public void setPlatform(Platform platform) {
-        this.platform = platform;
-    }
-
-    public Image getImage() {
-        return image;
-    }
-
-    public void setImage(Image image) {
-        this.image = image;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
 }

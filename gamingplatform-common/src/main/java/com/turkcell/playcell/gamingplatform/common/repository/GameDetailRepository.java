@@ -35,5 +35,4 @@ public interface GameDetailRepository extends JpaRepository<GameDetail, Long> {
 
     @Query(value = SqlQueries.FIND_GAME_BY_PLATFORM_ID_AND_TARIFF_ID)
     List<Game> findGameByPlatformIdAndTariffId(@Param("platformId") Long platformId, @Param("tariffId") Long tariffId);
-    
 }

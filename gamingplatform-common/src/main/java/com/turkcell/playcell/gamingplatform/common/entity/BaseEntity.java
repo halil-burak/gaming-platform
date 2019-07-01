@@ -1,11 +1,16 @@
 package com.turkcell.playcell.gamingplatform.common.entity;
 
 
+import lombok.*;
+
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.Instant;
 
 @MappedSuperclass
-public class BaseEntity {
+@NoArgsConstructor
+@Data
+public class BaseEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -43,45 +48,5 @@ public class BaseEntity {
 //        }catch(RuntimeException e) {
 //            this.LastModifiedBy = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
 //        }
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public Instant getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(Instant createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public String getLastModifiedBy() {
-        return LastModifiedBy;
-    }
-
-    public void setLastModifiedBy(String lastModifiedBy) {
-        LastModifiedBy = lastModifiedBy;
-    }
-
-    public Instant getLastModifiedDate() {
-        return lastModifiedDate;
-    }
-
-    public void setLastModifiedDate(Instant lastModifiedDate) {
-        this.lastModifiedDate = lastModifiedDate;
     }
 }

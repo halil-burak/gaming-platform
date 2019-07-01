@@ -1,6 +1,5 @@
 package com.turkcell.playcell.gamingplatform.api.controller;
 
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.turkcell.playcell.gamingplatform.api.dto.TariffDto;
+import com.turkcell.playcell.gamingplatform.api.dto.TariffDTO;
 import com.turkcell.playcell.gamingplatform.api.enumtypes.ResponseCodeStrings;
 import com.turkcell.playcell.gamingplatform.api.request.AuthorizationRequest;
 import com.turkcell.playcell.gamingplatform.api.response.DataResponse;
@@ -102,7 +101,7 @@ public class UserApiController extends BaseController {
 		
 		try {
 		    	
-			/*if (!super.CheckMsisdnFormat(msisdn)) {
+			/*if (!super.checkMsisdnFormat(msisdn)) {
 				DataResponse<?> response = DataResponse.createResponse(null, false, ResponseCodeStrings.MSISDN_FORMAT_ERROR, "MSISDN Format Check Failed");
 				log.info("MSISDN Format Check Failed for " + msisdn);
 				return new ResponseEntity<> (response, HttpStatus.BAD_REQUEST);
@@ -141,8 +140,7 @@ public class UserApiController extends BaseController {
 			return new ResponseEntity<> (response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
-	
+
 	@GetMapping (path="/getSubscriptionInfo", produces=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> getSubscriptionInfo (HttpServletRequest request) {
 		
@@ -152,7 +150,7 @@ public class UserApiController extends BaseController {
 		
 		try {		    
 	    	
-			/*if (!super.CheckMsisdnFormat(msisdn)) {	
+			/*if (!super.checkMsisdnFormat(msisdn)) {
 				DataResponse<?> response = DataResponse.createResponse(null, false, ResponseCodeStrings.MSISDN_FORMAT_ERROR, "MSISDN Format Check Failed");
 				log.info("MSISDN Format Check Failed for " + msisdn);
 				return new ResponseEntity<> (response, HttpStatus.BAD_REQUEST);
@@ -173,15 +171,15 @@ public class UserApiController extends BaseController {
 		    	String userTariff = subscriptionInfoService.getSubscriptionInfo(msisdn, tempToken);
 		    	
 		    	Tariff tariff = tariffService.findByName(userTariff);
-		    	TariffDto tariffDTO = new TariffDto();
+		    	TariffDTO tariffDTO = new TariffDTO();
 		    	
 	            if (tariff != null) {
-	            	tariffDTO = modelMapper.map(tariff, TariffDto.class);            	
+	            	tariffDTO = modelMapper.map(tariff, TariffDTO.class);
 	            } else {
-	                tariffDTO = new TariffDto("Free", 0, "Free", "Free", 0L, 0L);
+	                tariffDTO = new TariffDTO("Free", 0, "Free", "Free", 0L, 0L);
 	            }
-	            
-	            DataResponse<TariffDto> response = DataResponse.createResponse(tariffDTO, true, ResponseCodeStrings.SUCCESS, "Package Query is successfully done.");
+
+	            DataResponse<TariffDTO> response = DataResponse.createResponse(tariffDTO, true, ResponseCodeStrings.SUCCESS, "Package Query is successfully done.");
 	            log.info("Package Query successfully done for " + msisdn);
 	            return new ResponseEntity<Object>(response, HttpStatus.OK);
 		    }

@@ -25,7 +25,7 @@ public class BaseController {
 		return Optional.ofNullable(request.getHeader("turkcell-playcell-msisdn")).orElse(null);
 	}
 	
-	protected Boolean CheckMsisdnFormat (String msisdn) {
+	protected boolean checkMsisdnFormat(String msisdn) {
 		
 		if (msisdn != null) {
 			if (msisdn.matches("[0-9]+")) {
@@ -39,7 +39,7 @@ public class BaseController {
 		return false;
 	}
 	
-	protected Boolean checkAuthorizationHeader(HttpServletRequest request) {
+	protected boolean checkAuthorizationHeader(HttpServletRequest request) {
 		
         String authHeader = request.getHeader("Authorization");
 
@@ -81,5 +81,4 @@ public class BaseController {
         
         return applicationProperties.getDefaultLanguage();
     }
-
 }

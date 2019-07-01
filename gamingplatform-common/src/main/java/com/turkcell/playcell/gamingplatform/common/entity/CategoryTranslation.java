@@ -1,12 +1,17 @@
 package com.turkcell.playcell.gamingplatform.common.entity;
 
+import lombok.*;
+
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@NoArgsConstructor
+@Data
 @Table(uniqueConstraints = @UniqueConstraint(columnNames={"NAME", "LANGUAGE_ID"}))
-public class CategoryTranslation extends BaseEntity{
+public class CategoryTranslation extends BaseEntity implements Serializable {
 
     @Column(name = "NAME")
     private String name;
@@ -29,42 +34,5 @@ public class CategoryTranslation extends BaseEntity{
 
     public void removeCategorySlug(CategorySlug categorySlug) {
         this.getCategorySlugs().remove(categorySlug);
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-    public Language getLanguage() {
-        return language;
-    }
-
-    public void setLanguage(Language language) {
-        this.language = language;
-    }
-
-    public List<CategorySlug> getCategorySlugs() {
-        return categorySlugs;
-    }
-
-    @Override
-    public String toString() {
-        return "CategoryTranslation{" +
-                "name='" + name + '\'' +
-                ", categoryId=" + category.getId() +
-                ", languageId=" + language.getId() +
-                '}';
     }
 }

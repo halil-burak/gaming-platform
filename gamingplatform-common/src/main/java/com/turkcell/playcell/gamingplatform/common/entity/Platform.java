@@ -1,5 +1,7 @@
 package com.turkcell.playcell.gamingplatform.common.entity;
 
+import lombok.*;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -7,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@NoArgsConstructor
+@Data
 public class Platform extends BaseEntity {
 
     @Column(name = "NAME", unique = true)
@@ -34,46 +38,8 @@ public class Platform extends BaseEntity {
     @JoinColumn(name = "PLATFORM_ID")
     private List<CategoryIcon> categoryIcons = new ArrayList<>();
 
-    public Platform() { }
-
     public Platform(Long id) {
         super.setId(id);
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<Category> getCategories() {
-        return categories;
-    }
-
-    public void setCategories(List<Category> categories) {
-        this.categories = categories;
-    }
-
-    public List<Language> getLanguages() {
-        return languages;
-    }
-
-    public void setLanguages(List<Language> languages) {
-        this.languages = languages;
-    }
-
-    public FtpAccount getFtpAccount() {
-        return ftpAccount;
-    }
-
-    public void setFtpAccount(FtpAccount ftpAccount) {
-        this.ftpAccount = ftpAccount;
-    }
-
-    public List<PlatformTranslation> getPlatformTranslations() {
-        return platformTranslations;
     }
 
     public void addPlatformTranslation(PlatformTranslation platformTranslation) {
@@ -82,17 +48,5 @@ public class Platform extends BaseEntity {
 
     public void removePlatformTranslation(PlatformTranslation platformTranslation) {
         this.getPlatformTranslations().remove(platformTranslation);
-    }
-
-    public Image getLogo() {
-        return logo;
-    }
-
-    public List<CategoryIcon> getCategoryIcons() {
-        return categoryIcons;
-    }
-
-    public void setLogo(Image logo) {
-        this.logo = logo;
     }
 }

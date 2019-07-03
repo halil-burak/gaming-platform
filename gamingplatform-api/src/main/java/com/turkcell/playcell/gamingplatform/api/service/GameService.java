@@ -187,6 +187,8 @@ public class GameService implements IGameService {
                 if(game.getGameFile() != null) {
                     String urlWithToken = GenerateTicket.CreateStaticTicket(game.getUrl(),3600, applicationProperties.getCdnPrivateKey());
                     gameUrlDTO.setUrl(urlWithToken);
+                } else {
+                    gameUrlDTO.setUrl(game.getUrl());
                 }
             }
             

@@ -9,7 +9,7 @@ import lombok.RequiredArgsConstructor;
 @Builder
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class PlatformDto {
+public class PlatformDTO {
     private Long id;
     private String name;
 }

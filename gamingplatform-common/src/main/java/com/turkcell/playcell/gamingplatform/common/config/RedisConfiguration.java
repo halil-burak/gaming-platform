@@ -19,7 +19,7 @@ import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactor
 public class RedisConfiguration extends CachingConfigurerSupport {
 	
 	@Autowired
-	private commonApplicationProperties applicationProperties;
+	private CommonApplicationProperties applicationProperties;
 
     @Bean
     public LettuceConnectionFactory redisConnectionFactory() {

@@ -29,8 +29,7 @@ public class SubscriptionInfoService {
     private void setTimeout(RestTemplate restTemplate, int timeout) {
         restTemplate.setRequestFactory(new SimpleClientHttpRequestFactory());
         
-        SimpleClientHttpRequestFactory rf = (SimpleClientHttpRequestFactory) restTemplate
-                .getRequestFactory();
+        SimpleClientHttpRequestFactory rf = (SimpleClientHttpRequestFactory) restTemplate.getRequestFactory();
         rf.setReadTimeout(timeout);
         rf.setConnectTimeout(timeout);
     }
@@ -40,17 +39,13 @@ public class SubscriptionInfoService {
 	}
 	
 	private String requestSubscriptionInfo(String phoneNumber, String token) {
-		
 		try {
-			
-			if (ObjectUtils.isEmpty(phoneNumber)) 
-			{
+			if (ObjectUtils.isEmpty(phoneNumber)) {
 				log.error("requestSubscriptionInfo: phone number field is empty !!");
 				return null;
 			}
 			
-			if (ObjectUtils.isEmpty(token)) 
-			{
+			if (ObjectUtils.isEmpty(token)) {
 				log.error("requestSubscriptionInfo: token field is empty !!");
 				return null;
 			}
@@ -75,8 +70,7 @@ public class SubscriptionInfoService {
 	        if (data.get("data") != null) { 
 	        	String userTariff = data.get("data").get("data").get("SubscriptionType").asText();
 	        
-	        	if(userTariff != null && userTariff.equals("None"))
-	        	{
+	        	if(userTariff != null && userTariff.equals("None")) {
 	        		log.info("requestSubscriptionInfo: Package Information is None...");
 	        		userTariff = null;
 	        	}
@@ -84,7 +78,6 @@ public class SubscriptionInfoService {
 	        	log.info("requestSubscriptionInfo: Package Information is " + userTariff);
 	        	return userTariff;
 	        }
-	        
 	        return null;
 	        
 		} catch (Exception ex) {
@@ -92,6 +85,4 @@ public class SubscriptionInfoService {
 			return null;
 		}		
 	}
-
-	
 }

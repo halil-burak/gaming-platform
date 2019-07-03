@@ -1,6 +1,5 @@
 package com.turkcell.playcell.gamingplatform.api.response;
 
-
 import com.turkcell.playcell.gamingplatform.api.enumtypes.ResponseCodeStrings;
 
 import lombok.AllArgsConstructor;
@@ -23,7 +22,7 @@ public class DataResponse<T> {
     {
         DataResponse<T> resp = new DataResponse<T>();
         resp.data = data;
-        resp.meta = new MetaData(true, ResponseCodeStrings.TOKEN_SUCCESS, message);
+        resp.meta = new MetaData(true, ResponseCodeStrings.SUCCESS, message);
         return resp;
     }
 

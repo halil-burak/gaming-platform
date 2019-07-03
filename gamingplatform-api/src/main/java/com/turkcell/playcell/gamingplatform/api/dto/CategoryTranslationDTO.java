@@ -9,13 +9,8 @@ import lombok.RequiredArgsConstructor;
 @Builder
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class TariffDto {
-	
+public class CategoryTranslationDTO {
     private String name;
-    private int grade;
-    private String label;
-    private String packageName;
-    private Long offerId;
-    private Long provisioningId;
-    
+    private String language;
+    private String slug;
 }

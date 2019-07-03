@@ -7,7 +7,5 @@ import com.turkcell.playcell.gamingplatform.common.entity.GameSlug;
 
 @Repository
 public interface GameSlugRepository extends JpaRepository<GameSlug, Long> {
-	
     GameSlug findFirst1ByGameDetailTranslation_IdOrderByCreatedDateDesc(Long gdtId);
-    
 }

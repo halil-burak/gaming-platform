@@ -1,42 +1,22 @@
 package com.turkcell.playcell.gamingplatform.common.entity;
 
+import lombok.*;
+
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import java.io.Serializable;
 
 @Entity
-public class Complaint extends BaseEntity {
+@NoArgsConstructor
+@Data
+public class Complaint extends BaseEntity implements Serializable {
 
     private String agent;
-
     private String complaint;
 
     @ManyToOne
     @JoinColumn(name = "GAME_DETAIL_ID")
     private GameDetail gameDetail;
-
-    public String getAgent() {
-        return agent;
-    }
-
-    public void setAgent(String agent) {
-        this.agent = agent;
-    }
-
-    public String getComplaint() {
-        return complaint;
-    }
-
-    public void setComplaint(String complaint) {
-        this.complaint = complaint;
-    }
-
-    public GameDetail getGameDetail() {
-        return gameDetail;
-    }
-
-    public void setGameDetail(GameDetail gameDetail) {
-        this.gameDetail = gameDetail;
-    }
 }
 

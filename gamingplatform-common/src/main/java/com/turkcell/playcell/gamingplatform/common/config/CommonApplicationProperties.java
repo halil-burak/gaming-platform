@@ -7,7 +7,7 @@ import lombok.Getter;
 
 @Getter
 @Configuration
-public class commonApplicationProperties {
+public class CommonApplicationProperties {
 
     @Value("${spring.redis.host}")
     private String redisHost;
@@ -20,5 +20,4 @@ public class commonApplicationProperties {
     
     @Value("${cache.expirations.time}")
     private Integer cacheExpirationTime;
-
 }

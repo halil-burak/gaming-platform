@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.turkcell.playcell.gamingplatform.api.config.ApplicationProperties;
-import com.turkcell.playcell.gamingplatform.api.dto.GameUrlDto;
+import com.turkcell.playcell.gamingplatform.api.dto.GameUrlDTO;
 import com.turkcell.playcell.gamingplatform.api.enumtypes.ResponseCodeStrings;
 import com.turkcell.playcell.gamingplatform.api.response.DataResponse;
 import com.turkcell.playcell.gamingplatform.api.service.GameResponse;
@@ -45,7 +45,7 @@ public class GameListController extends BaseController {
     		
 	    	/*String msisdn = super.getPhoneNumber(request);
 	    	
-			if (!super.CheckMsisdnFormat(msisdn)) {
+			if (!super.checkMsisdnFormat(msisdn)) {
 				DataResponse<?> response = DataResponse.createResponse(null, false, ResponseCodeStrings.MSISDN_FORMAT_ERROR, "MSISDN Format Check Failed");
 				return new ResponseEntity<> (response, HttpStatus.BAD_REQUEST);
 			}*/
@@ -67,7 +67,7 @@ public class GameListController extends BaseController {
 				userTariff = subscriptionInfoService.getSubscriptionInfo(msisdn, tempToken);
 			}
 		        
-			GameUrlDto gameUrlDTO = gameService.getGame(userTariff, platformName, slug, language);
+			GameUrlDTO gameUrlDTO = gameService.getGame(userTariff, platformName, slug, language);
 				
 			if (ObjectUtils.isEmpty(gameUrlDTO.getUrl())) {
 					
@@ -83,12 +83,12 @@ public class GameListController extends BaseController {
 				return new ResponseEntity<>(response, HttpStatus.OK);
 			}
 		        
-			DataResponse<Object> response = DataResponse.createResponse(gameUrlDTO, true, ResponseCodeStrings.GAME_LIST_SUCCESS, "Game List Succesfully Provided.");
+			DataResponse<Object> response = DataResponse.createResponse(gameUrlDTO, true, ResponseCodeStrings.SUCCESS, "Game List Succesfully Provided.");
 			return new ResponseEntity<>(response, HttpStatus.OK);
 			
     	} catch(Exception ex) {
     		log.error("An exception occurred during getGame API call... -> {}", ex);
-            return new ResponseEntity<>("Error", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
     	}
     }
     
@@ -103,10 +103,10 @@ public class GameListController extends BaseController {
             gameResponse = gameService.getGamesByPlatformAndLanguage(pName, language);
         } catch (Exception ex) {
             log.error("An error occurred during getGameList API... -> {}", ex);
-            return new ResponseEntity<>("Error", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
         
-        DataResponse<Object> response = DataResponse.createResponse(gameResponse, true, ResponseCodeStrings.GAME_LIST_SUCCESS, pName + " Platform Game List Successfully Provided.");
+        DataResponse<Object> response = DataResponse.createResponse(gameResponse, true, ResponseCodeStrings.SUCCESS, pName + " Platform Game List Successfully Provided.");
 		return new ResponseEntity<>(response, HttpStatus.OK);
     }
 

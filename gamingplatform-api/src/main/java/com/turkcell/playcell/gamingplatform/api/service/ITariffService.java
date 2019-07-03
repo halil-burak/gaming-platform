@@ -5,5 +5,4 @@ import com.turkcell.playcell.gamingplatform.common.entity.Tariff;
 public interface ITariffService {
 	
 	Tariff findByName(String name);
-
 }

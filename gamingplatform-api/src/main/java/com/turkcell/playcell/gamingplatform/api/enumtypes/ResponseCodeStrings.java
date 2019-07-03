@@ -1,7 +1,6 @@
 package com.turkcell.playcell.gamingplatform.api.enumtypes;
 
 public enum ResponseCodeStrings {
-	TOKEN_SUCCESS,
 	BASIC_AUTH_FAIL,
 	AUTH_FAIL_PERM_TOKEN,
 	AUTH_FAIL_TEMP_TOKEN,
@@ -10,9 +9,7 @@ public enum ResponseCodeStrings {
 	PROCESS_ERROR,
 	MSISDN_FORMAT_ERROR,
 	PACKAGE_QUERY_ERROR,
-	PACKAGE_QUERY_SUCCESS,
 	GAME_URL_NULL,
-	GAME_LIST_SUCCESS,
 	EXCEPTION_ERROR,
 	SUCCESS;
 }

@@ -10,5 +10,4 @@ import com.turkcell.playcell.gamingplatform.common.entity.GameDetailTranslation;
 public interface GameDetailTranslationRepository extends JpaRepository<GameDetailTranslation, Long> {
 	
     GameDetailTranslation findByLanguageShortNameEqualsIgnoreCaseAndGameDetailId(String language, Long gameDetailId);
-    
 }

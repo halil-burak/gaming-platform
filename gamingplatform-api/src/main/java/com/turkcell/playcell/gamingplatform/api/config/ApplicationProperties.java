@@ -43,6 +43,9 @@ public class ApplicationProperties {
     
     @Value("${language.default}")
     private String defaultLanguage;
+
+    @Value("${cdn.private.key}")
+    private String cdnPrivateKey;
     
     @Bean
     public ModelMapper modelMapper() {

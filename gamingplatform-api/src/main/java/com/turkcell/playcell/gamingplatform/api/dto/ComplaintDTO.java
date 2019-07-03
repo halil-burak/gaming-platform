@@ -1,24 +1,17 @@
 package com.turkcell.playcell.gamingplatform.api.dto;
 
-public class ComplaintDTO {
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
+import java.io.Serializable;
+
+@Data
+@Builder
+@RequiredArgsConstructor
+@AllArgsConstructor
+public class ComplaintDTO implements Serializable {
     private String agent;
-
     private String complaint;
-
-    public String getAgent() {
-        return agent;
-    }
-
-    public void setAgent(String agent) {
-        this.agent = agent;
-    }
-
-    public String getComplaint() {
-        return complaint;
-    }
-
-    public void setComplaint(String complaint) {
-        this.complaint = complaint;
-    }
 }

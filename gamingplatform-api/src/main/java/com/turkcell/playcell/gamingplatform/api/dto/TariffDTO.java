@@ -9,8 +9,11 @@ import lombok.RequiredArgsConstructor;
 @Builder
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class CategoryTranslationDto {
+public class TariffDTO {
     private String name;
-    private String language;
-    private String slug;
+    private int grade;
+    private String label;
+    private String packageName;
+    private Long offerId;
+    private Long provisioningId;
 }

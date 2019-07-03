@@ -11,16 +11,14 @@ import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
+import com.turkcell.playcell.gamingplatform.api.config.ApplicationProperties;
+import com.turkcell.playcell.gamingplatform.api.util.GenerateTicket;
 import org.springframework.beans.factory.annotation.Autowired;
+import com.turkcell.playcell.gamingplatform.api.dto.*;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ObjectUtils;
 
-import com.turkcell.playcell.gamingplatform.api.dto.CategoryDto;
-import com.turkcell.playcell.gamingplatform.api.dto.GameDto;
-import com.turkcell.playcell.gamingplatform.api.dto.GameUrlDto;
-import com.turkcell.playcell.gamingplatform.api.dto.ImageDto;
-import com.turkcell.playcell.gamingplatform.api.dto.TagDto;
+import com.turkcell.playcell.gamingplatform.api.dto.CategoryDTO;
 import com.turkcell.playcell.gamingplatform.common.entity.Category;
 import com.turkcell.playcell.gamingplatform.common.entity.CategorySlug;
 import com.turkcell.playcell.gamingplatform.common.entity.CategoryTranslation;
@@ -48,29 +46,27 @@ public class GameService implements IGameService {
 
     private final GameDetailRepository gameDetailRepository;
 
-    @Autowired
-    private CategoryRepository categoryRepository;
+    private final CategoryRepository categoryRepository;
+
+    private final GameSlugRepository gameSlugRepository;
+
+    private final GameDetailTranslationRepository gameDetailTranslationRepository;
+
+    private final CategoryTranslationRepository categoryTranslationRepository;
+
+    private final CategorySlugRepository categorySlugRepository;
 
     @Autowired
-    private GameSlugRepository gameSlugRepository;
-
-    @Autowired
-    private GameDetailTranslationRepository gameDetailTranslationRepository;
-
-    @Autowired
-    private CategoryTranslationRepository categoryTranslationRepository;
-
-    @Autowired
-    private CategorySlugRepository categorySlugRepository;
+    private ApplicationProperties applicationProperties;
 
     @Cacheable(value = "games", key = "{ #platformName, #language }")
     public GameResponse getGamesByPlatformAndLanguage(String platformName, String language) {
 
         Instant datetime = Instant.now();
         
-        List<GameDto> gameList = gameDetailRepository.findGameByPlatformName(platformName, language, datetime).stream().map(game -> {
+        List<GameDTO> gameList = gameDetailRepository.findGameByPlatformName(platformName, language, datetime).stream().map(game -> {
 
-            GameDto gameDTO = new GameDto();
+            GameDTO gameDTO = new GameDTO();
             
             gameDTO.setId(game.getId());
             gameDTO.setName(game.getName());
@@ -104,10 +100,9 @@ public class GameService implements IGameService {
                 GameDetailTranslation gdt = gameDetailTranslationRepository.findByLanguageShortNameEqualsIgnoreCaseAndGameDetailId(language, gd.getId());
                 if (gdt != null) {
                     gameDTO.setImages(gdt.getImages().stream().map(image -> {
-                        ImageDto imageDTO = new ImageDto();
+                        ImageDTO imageDTO = new ImageDTO();
                         imageDTO.setSizeId(image.getSizeId());
                         imageDTO.setUrl(image.getCdnUrl() + image.getPath());
-                        // pass the url to the function for authentication
                         return imageDTO;
                     }).collect(Collectors.toList()));
 
@@ -122,24 +117,26 @@ public class GameService implements IGameService {
                     gameDTO.setDescription(gdt.getDescription());
                 }
             }
-        
             return gameDTO;
         }).collect(Collectors.toList());
 
-        List<CategoryDto> categories = categoryRepository.findDistinctByPlatformsNameEqualsIgnoreCaseAndIsTagFalse(platformName).stream().map(category -> {
+        List<CategoryDTO> categories = categoryRepository.findDistinctByPlatformsNameEqualsIgnoreCaseAndIsTagFalse(platformName).stream().map(category -> {
             
-        	CategoryDto categoryDTO = new CategoryDto();
+        	CategoryDTO categoryDTO = new CategoryDTO();
             categoryDTO.setId(category.getId());
             categoryDTO.setName(category.getName());
             categoryDTO.setVisible(category.isVisible());
 
             CategoryTranslation ct = categoryTranslationRepository.findByLanguageShortNameEqualsIgnoreCaseAndCategoryId(language, category.getId());
             if (ct != null) {
-                CategorySlug lastSlug = categorySlugRepository.findFirst1ByCategoryTranslation_IdOrderByCreatedDateDesc(ct.getId());
-                if (lastSlug != null) {
-                    String slug = lastSlug.getUrl();
-                    categoryDTO.setSlug(slug);
-                }
+                List<CategorySlug> slugs = categorySlugRepository.findByCategoryTranslation_Id(ct.getId());
+                slugs.sort(Comparator.comparing(CategorySlug::getCreatedDate).reversed());
+                String defaultSlug = slugs.get(0).getUrl();
+                categoryDTO.setSlug(defaultSlug);
+                categoryDTO.setOldSlugs(slugs.stream().map(cs -> {
+                    String s = cs.getUrl();
+                    return s;
+                }).collect(Collectors.toList()).stream().filter(x -> !x.equalsIgnoreCase(defaultSlug)).collect(Collectors.toList()));
                 categoryDTO.setTitle(ct.getName());
             }
             return categoryDTO;
@@ -147,9 +144,9 @@ public class GameService implements IGameService {
 
         Map<String, List<Long>> tagMap = new HashMap<>();
         
-        List<TagDto> tagCategories = categoryRepository.findDistinctByPlatformsNameEqualsIgnoreCaseAndIsTagTrue(platformName).stream().map(category -> {
+        List<TagDTO> tagCategories = categoryRepository.findDistinctByPlatformsNameEqualsIgnoreCaseAndIsTagTrue(platformName).stream().map(category -> {
             
-        	TagDto tagDTO = new TagDto();
+        	TagDTO tagDTO = new TagDTO();
             tagMap.put(category.getName().toLowerCase(Locale.ROOT).replace(" ", ""), gameRepository.findDistinctByGameDetailsPlatformNameEqualsIgnoreCaseAndGameDetailsCategoriesId(platformName, category.getId()).stream().map(game -> {
                 return game.getId();
             }).collect(Collectors.toList()));
@@ -170,18 +167,13 @@ public class GameService implements IGameService {
     }
 
     @Cacheable(value = "game", key = "{#platformName, #slug, #userTariff, #language}")
-    public GameUrlDto getGame(String userTariff, String platformName, String slug, String language) {
+    public GameUrlDTO getGame(String userTariff, String platformName, String slug, String language) {
     	
     	try {
-    		List<Game> games = gameRepository.findGameUrl(platformName, language, slug);
+    		Game game = gameRepository.findGameUrl(platformName, language, slug);
+            if(game == null ){ return null; }
             
-            if(ObjectUtils.isEmpty(games)){
-                return null;
-            }
-            
-            Game game = games.get(0);
-            
-            GameUrlDto gameUrlDTO = new GameUrlDto();
+            GameUrlDTO gameUrlDTO = new GameUrlDTO();
             gameUrlDTO.setId(game.getId());
             
             GameDetail gameDetail = game.getGameDetails().stream().filter(gd -> gd.getPlatform().getName().equalsIgnoreCase(platformName)).findFirst().get();
@@ -192,7 +184,12 @@ public class GameService implements IGameService {
             gameUrlDTO.setDefaultSlug(gameDetailTranslation.getGameSlugs().get(0).getUrl());
             
             if(gameDetail.getTariffs().size() == 0 || gameDetail.getTariffs().stream().filter(t -> t.getName().equalsIgnoreCase(userTariff)).findFirst().isPresent()){
-                gameUrlDTO.setUrl(game.getUrl());
+                if(game.getGameFile() != null) {
+                    String urlWithToken = GenerateTicket.CreateStaticTicket(game.getUrl(),3600, applicationProperties.getCdnPrivateKey());
+                    gameUrlDTO.setUrl(urlWithToken);
+                } else {
+                    gameUrlDTO.setUrl(game.getUrl());
+                }
             }
             
             return gameUrlDTO;
@@ -200,7 +197,5 @@ public class GameService implements IGameService {
     	} catch (Exception ex) {
     		return null;
     	}
-        
     }
-
 }

@@ -1,13 +1,18 @@
 package com.turkcell.playcell.gamingplatform.common.entity;
 
+import lombok.*;
+
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@NoArgsConstructor
+@Data
 @Table(uniqueConstraints = @UniqueConstraint(columnNames={"GAME_ID", "PLATFORM_ID"}))
-public class GameDetail extends BaseEntity{
+public class GameDetail extends BaseEntity implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "GAME_ID")
@@ -46,78 +51,5 @@ public class GameDetail extends BaseEntity{
 
     public void removeGameDetailTranslations(GameDetailTranslation gameDetailTranslation) {
         this.gameDetailTranslations.remove(gameDetailTranslation);
-    }
-
-    public List<GameDetailTranslation> getGameDetailTranslations() {
-        return gameDetailTranslations;
-    }
-
-    public Platform getPlatform() {
-        return platform;
-    }
-
-    public void setPlatform(Platform platform) {
-        this.platform = platform;
-    }
-
-    public List<Category> getCategories() {
-        return categories;
-    }
-
-    public void setCategories(List<Category> categories) {
-        this.categories = categories;
-    }
-
-    public List<Tariff> getTariffs() {
-        return tariffs;
-    }
-
-    public void setTariffs(List<Tariff> tariffs) {
-        this.tariffs = tariffs;
-    }
-
-    public Game getGame() {
-        return game;
-    }
-
-    public void setGame(Game game) {
-        this.game = game;
-    }
-
-    public Instant getPublishDatetime() {
-        return publishDatetime;
-    }
-
-    public void setPublishDatetime(Instant publishDatetime) {
-        this.publishDatetime = publishDatetime;
-    }
-
-    public Instant getUnpublishDatetime() {
-        return unpublishDatetime;
-    }
-
-    public void setUnpublishDatetime(Instant unpublishDatetime) {
-        this.unpublishDatetime = unpublishDatetime;
-    }
-
-    public boolean isActive() {
-        return isActive;
-    }
-
-    public void setActive(boolean isActive) {
-        this.isActive = isActive;
-    }
-
-    @Override
-    public String toString() {
-        return "GameDetail{" +
-               // "gameId=" + game.getId() +
-                ", platformId=" + platform.getId() +
-                ", isActive=" + isActive +
-                //", categories=" + categories +
-                //", tariffs=" + tariffs +
-                ", publishDatetime=" + publishDatetime +
-                ", unpublishDatetime=" + unpublishDatetime +
-                '}';
     }
 }

@@ -1,9 +1,4 @@
-/target/
-/gamingplatform-api/target/
-/gamingplatform-common/target/
-/gamingplatform-integration/target/
-/gamingplatform-integration/gamingplatform-integration-mobileconnect/target/
-/gamingplatform-integration/gamingplatform-integration-som/target/
+**/target/
 
 !.mvn/wrapper/maven-wrapper.jar
 
@@ -33,5 +28,5 @@
 /.nb-gradle/
 
 ### Logs ###
-/log/
-/logs/
+**/*.log
+**/logs

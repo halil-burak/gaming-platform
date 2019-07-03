@@ -14,11 +14,13 @@ import com.turkcell.playcell.gamingplatform.api.controller.GameListController;
 import com.turkcell.playcell.gamingplatform.api.controller.UserApiController;
 
 import io.micrometer.core.instrument.MeterRegistry;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 
 @SpringBootApplication
 @EnableAutoConfiguration
 @EnableCaching
+@EnableSwagger2
 //@ComponentScan(basePackages = {"com.turkcell.playcell.*"})
 //@EntityScan("com.turkcell.playcell.gamingplatform.common.*")
 //@EnableJpaRepositories("com.turkcell.playcell.gamingplatform.api.repository")

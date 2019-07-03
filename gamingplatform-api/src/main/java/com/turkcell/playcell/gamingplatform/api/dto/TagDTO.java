@@ -1,7 +1,9 @@
 package com.turkcell.playcell.gamingplatform.api.dto;
 
-import java.util.ArrayList;
+
+import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,10 +14,7 @@ import lombok.RequiredArgsConstructor;
 @Builder
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class GameDetailTranslationDto {
-	 private String name;
-	 private String gameSlug;
-	 private String description;
-	 private String language;
-	 private List<ImageDto> images = new ArrayList<>();
+public class TagDTO implements Serializable {
+	private static final long serialVersionUID = 682481735386557634L;
+	private Map<String, List<Long>> tags;
 }

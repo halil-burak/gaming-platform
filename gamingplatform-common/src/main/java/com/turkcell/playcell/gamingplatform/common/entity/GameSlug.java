@@ -13,7 +13,12 @@ import java.io.Serializable;
 @Table(uniqueConstraints={@UniqueConstraint(columnNames = {"URL" , "PLATFORM_ID", "LANGUAGE_ID"})})
 public class GameSlug extends BaseEntity implements Serializable {
 
-    @NotNull
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -6211105307405206495L;
+
+	@NotNull
     @NotEmpty
     @Column(name = "URL")
     private String url;

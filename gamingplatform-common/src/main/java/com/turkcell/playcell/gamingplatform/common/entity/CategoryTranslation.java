@@ -13,7 +13,12 @@ import java.util.List;
 @Table(uniqueConstraints = @UniqueConstraint(columnNames={"NAME", "LANGUAGE_ID"}))
 public class CategoryTranslation extends BaseEntity implements Serializable {
 
-    @Column(name = "NAME")
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3000511203745588289L;
+
+	@Column(name = "NAME")
     private String name;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)

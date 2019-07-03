@@ -12,7 +12,11 @@ import java.io.Serializable;
 @Data
 public class GameFile extends BaseEntity implements Serializable{
 
-    private String cdnUrl;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 8753228059431638845L;
+	private String cdnUrl;
     private String path;
 
     @ManyToOne

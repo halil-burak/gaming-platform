@@ -12,7 +12,12 @@ import java.util.List;
 @Data
 public class Language extends BaseEntity implements Serializable {
 
-    @Column(name = "NAME", unique = true)
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -2273491619735069936L;
+
+	@Column(name = "NAME", unique = true)
     private String name;
 
     @Column(name = "SHORT_NAME", unique = true)

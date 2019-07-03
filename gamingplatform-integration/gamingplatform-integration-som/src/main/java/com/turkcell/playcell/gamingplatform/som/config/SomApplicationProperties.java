@@ -19,5 +19,11 @@ public class SomApplicationProperties {
 
 	@Value("${som.client.createOrder.uri}")
 	private String uri;
+	
+	@Value("${custom.server.location}")
+	private String serverLocation;
+	
+	@Value("${som.client.isturkcell.uri}")
+	private String isTurkcellUri;
 
 }

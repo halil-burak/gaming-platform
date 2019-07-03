@@ -13,7 +13,11 @@ import java.util.List;
 @Data
 public class Image extends BaseEntity implements Serializable {
 
-    private Long sizeId;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -1935992408851076922L;
+	private Long sizeId;
     private String cdnUrl;
     private String path;
 

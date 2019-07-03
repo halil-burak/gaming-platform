@@ -79,6 +79,6 @@ public class BaseController {
             }
         }
         
-        return applicationProperties.getDefaultLanguage();
+        return applicationProperties.getLocaleLanguage().toLanguageTag();
     }
 }

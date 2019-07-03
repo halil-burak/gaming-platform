@@ -12,7 +12,11 @@ import java.io.Serializable;
 @Data
 public class Complaint extends BaseEntity implements Serializable {
 
-    private String agent;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 776215363266476298L;
+	private String agent;
     private String complaint;
 
     @ManyToOne

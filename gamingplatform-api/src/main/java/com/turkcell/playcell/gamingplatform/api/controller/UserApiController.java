@@ -1,9 +1,12 @@
 package com.turkcell.playcell.gamingplatform.api.controller;
 
+import java.util.Locale;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.context.MessageSource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.turkcell.playcell.gamingplatform.api.config.ApplicationProperties;
 import com.turkcell.playcell.gamingplatform.api.dto.TariffDTO;
 import com.turkcell.playcell.gamingplatform.api.enumtypes.ResponseCodeStrings;
 import com.turkcell.playcell.gamingplatform.api.request.AuthorizationRequest;
@@ -46,11 +50,15 @@ public class UserApiController extends BaseController {
 	private final JWTToken JWTTokenService;
 	
     private final ModelMapper modelMapper;
+    
+    private final MessageSource messageSource;
+    
+    private final ApplicationProperties applicationProperties;
 	
     @GetMapping("")
-    public String home() {
+    public String home(@RequestHeader(name="Accept-Language",required = false) Locale locale) {
         log.info("PLAYCELL GAME LIST/USER API v2.0 Home Page Visited !!!");
-        return "Welcome to Playcell User Authantication and Platform Game List Provider API";
+        return messageSource.getMessage("welcome.message", null, ObjectUtils.isEmpty(locale) ? applicationProperties.getLocaleLanguage() : locale);
     }
 	
 	// Mobile Connect Authorization Code Verification and Return Permanent Token

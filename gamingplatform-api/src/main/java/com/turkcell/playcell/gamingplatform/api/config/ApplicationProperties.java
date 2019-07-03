@@ -1,5 +1,7 @@
 package com.turkcell.playcell.gamingplatform.api.config;
 
+import java.util.Locale;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -35,14 +37,8 @@ public class ApplicationProperties {
     @Value("${subscriptioninfo.url}")
     private String subscriptionInfoUrl;
     
-    @Value("${message.gameurlnull.tr}")
-    private String messageGameUrlTR;
-    
-    @Value("${message.gameurlnull.en}")
-    private String messageGameUrlEN;
-    
-    @Value("${language.default}")
-    private String defaultLanguage;
+    @Value("${default.locale.language}")
+    private Locale localeLanguage;
 
     @Value("${cdn.private.key}")
     private String cdnPrivateKey;

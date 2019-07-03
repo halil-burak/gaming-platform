@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="SO_BC_Prov_SubscriptionServiceVariant"
+	targetNamespace="http://www.accenture.com/assets/sdp/sync/SO_BC_Prov_SubscriptionServiceVariant"
+	xmlns="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:client="http://www.accenture.com/assets/sdp/sync/SO_BC_Prov_SubscriptionServiceVariant"
+	xmlns:cdm="http://www.accenture.com/assets/sdp/commonDataModel/asynch"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+	<types>
+		<schema attributeFormDefault="qualified" elementFormDefault="qualified"
+			targetNamespace="http://www.accenture.com/assets/sdp/sync/SO_BC_Prov_SubscriptionServiceVariant"
+			xmlns="http://www.w3.org/2001/XMLSchema">
+			<import namespace="http://www.accenture.com/assets/sdp/commonDataModel/asynch"
+				schemaLocation="TSOSchema_ASYNCH_withnamespace_v4.xsd" />
+		</schema>
+	</types>
+	<message name="SO_BC_Prov_SubscriptionServiceVariantRequestMessage">
+		<part name="payload" element="cdm:TSO_DATA">
+		</part>
+	</message>
+	<message name="SO_BC_Prov_SubscriptionServiceVariantResponseMessage">
+		<part name="payload" element="cdm:TSO_DATA">
+		</part>
+	</message>
+	<portType name="SO_BC_Prov_SubscriptionServiceVariant">
+		<operation name="process">
+			<documentation>
+				process
+				@autopilot.sla.success 250
+				@autopilot.sla.exception 500
+			</documentation>
+			<input message="client:SO_BC_Prov_SubscriptionServiceVariantRequestMessage">
+			</input>
+			<output message="client:SO_BC_Prov_SubscriptionServiceVariantResponseMessage">
+			</output>
+		</operation>
+	</portType>
+	<binding name="SO_BC_Prov_SubscriptionServiceVariantBinding"
+		type="client:SO_BC_Prov_SubscriptionServiceVariant">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<operation name="process">
+			<soap:operation style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+		</operation>
+	</binding>
+	<service name="SO_BC_Prov_SubscriptionServiceVariant">
+		<port name="SO_BC_Prov_SubscriptionServiceVariantPortType"
+			binding="client:SO_BC_Prov_SubscriptionServiceVariantBinding">
+			<soap:address
+				location="http://playcell.turkcell.entp.tgc:7712/CallGateSubscriptionWS/services/SO_BC_Prov_SubscriptionServiceVariant/" />
+		</port>
+	</service>
+</definitions>

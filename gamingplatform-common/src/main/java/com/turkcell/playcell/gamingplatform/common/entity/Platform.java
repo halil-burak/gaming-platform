@@ -13,7 +13,12 @@ import java.util.List;
 @Data
 public class Platform extends BaseEntity {
 
-    @Column(name = "NAME", unique = true)
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5935406666950883248L;
+
+	@Column(name = "NAME", unique = true)
     @NotNull @NotEmpty
     private String name;
 

@@ -13,7 +13,12 @@ import java.io.Serializable;
 @Data
 public class User extends BaseEntity implements Serializable {
 
-    @Column(name = "USERNAME", unique = true)
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -4837571984922071995L;
+
+	@Column(name = "USERNAME", unique = true)
     private String username;
 
     @Column(name = "PASSWORD")

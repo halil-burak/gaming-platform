@@ -11,7 +11,12 @@ import java.util.List;
 @Data
 public class GameDetailTranslation extends BaseEntity{
 
-    @Column(name = "NAME")
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7048719881381950875L;
+
+	@Column(name = "NAME")
     private String name;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)

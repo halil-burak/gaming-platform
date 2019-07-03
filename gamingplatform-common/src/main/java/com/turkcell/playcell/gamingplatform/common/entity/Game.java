@@ -12,7 +12,12 @@ import java.util.List;
 @Data
 public class Game extends BaseEntity implements Serializable {
 
-    @Column(name = "NAME", unique = true)
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -1895591245944386546L;
+
+	@Column(name = "NAME", unique = true)
     private String name;
 
     @Column(name = "URL")

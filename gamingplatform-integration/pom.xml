@@ -15,7 +15,7 @@
     
     <modules>
         <module>gamingplatform-integration-mobileconnect</module>
-    <module>gamingplatform-integration-som</module>
-  </modules>
+    	<module>gamingplatform-integration-som</module>
+  	</modules>
     
 </project>

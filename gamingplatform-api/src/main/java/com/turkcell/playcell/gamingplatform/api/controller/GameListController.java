@@ -1,13 +1,17 @@
 package com.turkcell.playcell.gamingplatform.api.controller;
 
+import java.util.Locale;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -37,22 +41,20 @@ public class GameListController extends BaseController {
 	
 	private final JWTToken JWTTokenService;
 	
+	private final MessageSource messageSource;
+	
     @GetMapping("/platforms/{platformName}/games/{slug}")
     public ResponseEntity<Object> getGame(@PathVariable(name = "platformName") String platformName, @PathVariable(name = "slug") String slug, 
-    								HttpServletRequest request, HttpServletResponse hresponse) {
+    								HttpServletRequest request, HttpServletResponse hresponse,
+    								@RequestHeader(name="Accept-Language",required = false) Locale locale) {
     	
     	try {
-    		
-	    	/*String msisdn = super.getPhoneNumber(request);
-	    	
-			if (!super.checkMsisdnFormat(msisdn)) {
-				DataResponse<?> response = DataResponse.createResponse(null, false, ResponseCodeStrings.MSISDN_FORMAT_ERROR, "MSISDN Format Check Failed");
-				return new ResponseEntity<> (response, HttpStatus.BAD_REQUEST);
-			}*/
 		    
 			String tempToken = super.getAuthorizationHeader(request);
 			String language = super.extractLanguageCookie(request);
 			String userTariff = "Free";
+			
+			log.info(language);
 			
 			if (!ObjectUtils.isEmpty(tempToken)) {
 				
@@ -71,15 +73,8 @@ public class GameListController extends BaseController {
 				
 			if (ObjectUtils.isEmpty(gameUrlDTO.getUrl())) {
 					
-				String gameUrlMessage = null;
-					
-				if (language.equals("tr")) {
-					gameUrlMessage = applicationProperties.getMessageGameUrlTR();
-				} else {
-					gameUrlMessage = applicationProperties.getMessageGameUrlEN();
-				}
-					
-				DataResponse<Object> response = DataResponse.createResponse(gameUrlDTO, true, ResponseCodeStrings.GAME_URL_NULL, gameUrlMessage);
+				DataResponse<Object> response = DataResponse.createResponse(gameUrlDTO, true, ResponseCodeStrings.GAME_URL_NULL, 
+						messageSource.getMessage("game.url.null", null, ObjectUtils.isEmpty(locale) ? applicationProperties.getLocaleLanguage() : locale));
 				return new ResponseEntity<>(response, HttpStatus.OK);
 			}
 		        

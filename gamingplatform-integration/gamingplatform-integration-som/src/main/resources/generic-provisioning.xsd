@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<xs:schema targetNamespace="http://www.accenture.com/assets/sdp/commonDataModel/asynch"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.accenture.com/assets/sdp/commonDataModel/asynch"
+	elementFormDefault="qualified">
+	<xs:element name="TSO_DATA">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="TSOheader" />
+				<xs:element ref="TSOattributes" minOccurs="0" />
+				<xs:element ref="TSOresult" minOccurs="0" />
+				<xs:element name="DELIVERY_CONTENT" type="xs:string"
+					minOccurs="0" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="TSOattributes">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="attribute" minOccurs="0" maxOccurs="unbounded" />
+				<xs:element ref="list" minOccurs="0" maxOccurs="unbounded" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="TSOheader">
+		<xs:complexType>
+			<xs:attribute name="TSOID" type="xs:string" use="required" />
+			<xs:attribute name="TSOlabel" type="xs:string" use="required" />
+			<xs:attribute name="destinationSystemId" type="xs:string" />
+			<xs:attribute name="destinationSystemPassword" type="xs:string" />
+			<xs:attribute name="inconcertTaskId" type="xs:string" />
+			<xs:attribute name="numberOfAttributes" type="xs:string" />
+			<xs:attribute name="sequenceId" type="xs:string" />
+			<xs:attribute name="continueOnFail" type="xs:string" />
+			<xs:attribute name="rollbackOnError" type="xs:string" />
+			<xs:attribute name="actionReason" type="xs:string" />
+			<xs:attribute name="submitTSO" type="xs:string" />
+			<xs:attribute name="orderId" type="xs:string" />
+			<xs:attribute name="MSISDN" type="xs:string" />
+			<xs:attribute name="IMSI" type="xs:string" />
+			<xs:attribute name="priority" type="xs:int" />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="TSOresult">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="statusCode" />
+				<xs:element ref="errorCode" minOccurs="0" />
+				<xs:element ref="errorDescription" minOccurs="0" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="attribute">
+		<xs:complexType>
+			<xs:attribute name="name" type="xs:string" use="required" />
+			<xs:attribute name="value" type="xs:string" use="required" />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="errorCode" type="xs:string" />
+	<xs:element name="errorDescription" type="xs:string" />
+	<xs:element name="list">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="attribute" minOccurs="0" maxOccurs="unbounded" />
+				<xs:element ref="list" minOccurs="0" maxOccurs="unbounded" />
+			</xs:sequence>
+			<xs:attribute name="name" type="xs:string" use="required" />
+			<xs:attribute name="value" type="xs:string" />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="statusCode" type="xs:string" />
+</xs:schema>

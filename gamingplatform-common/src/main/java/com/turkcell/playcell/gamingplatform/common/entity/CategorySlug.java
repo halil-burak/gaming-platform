@@ -15,7 +15,12 @@ import java.io.Serializable;
 @Data
 public class CategorySlug extends BaseEntity implements Serializable {
 
-    @NotNull
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3242995852046486614L;
+
+	@NotNull
     @NotEmpty
     @Column(name = "URL", unique = true)
     private String url;

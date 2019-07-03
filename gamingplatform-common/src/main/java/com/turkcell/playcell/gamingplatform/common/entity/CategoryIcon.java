@@ -13,7 +13,12 @@ import java.io.Serializable;
 @Data
 public class CategoryIcon extends BaseEntity implements Serializable {
 
-    @ManyToOne
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -2736976064465769061L;
+
+	@ManyToOne
     @JoinColumn(name = "PLATFORM_ID")
     private Platform platform;
 

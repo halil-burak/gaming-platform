@@ -16,7 +16,12 @@ import java.util.List;
 @Data
 public class Tariff extends BaseEntity implements Serializable {
 
-    @Column(name = "NAME")
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -2322514156659774504L;
+
+	@Column(name = "NAME")
     @NotNull @NotEmpty
     private String name;
 

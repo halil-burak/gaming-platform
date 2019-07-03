@@ -9,13 +9,17 @@
     <version>1.0</version>
   </parent>
   
-  <groupId>com.turkcell.playcell</groupId>
   <artifactId>gamingplatform-integration-som</artifactId>
-  <version>1.0</version>
   
   <name>gamingplatform-integration-som</name>
+  <packaging>jar</packaging>
   
   <dependencies>
+  		<dependency>
+    		<groupId>org.springframework.boot</groupId>
+    		<artifactId>spring-boot-starter-web-services</artifactId>
+		</dependency>
+	    
 	    <dependency>
             <groupId>wsdl4j</groupId>
             <artifactId>wsdl4j</artifactId>
@@ -31,6 +35,58 @@
             <artifactId>gamingplatform-common</artifactId>
             <version>1.0</version>
         </dependency>
+        
+        <dependency>
+    		<groupId>org.apache.commons</groupId>
+    		<artifactId>commons-lang3</artifactId>
+    		<!--  version>3.9</version-->
+		</dependency>
   </dependencies>
   
+    <build>
+        <plugins>
+            <!--<plugin>-->
+                <!--<groupId>org.jvnet.jaxb2.maven2</groupId>-->
+                <!--<artifactId>maven-jaxb2-plugin</artifactId>-->
+                <!--<version>0.13.1</version>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<goals>-->
+                            <!--<goal>generate</goal>-->
+                        <!--</goals>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+                <!--<configuration>-->
+                    <!--<schemaLanguage>WSDL</schemaLanguage>-->
+                    <!--<generatePackage>com.turkcell.gollercepte.integration.som.wsdltypes.sms</generatePackage>-->
+                    <!--<schemas>-->
+                        <!--<schema>-->
+                            <!--<url>http://inka-om-stb.turkcell.com.tr/ContactNotificationManagement/ContactNotificationManagement_v1.0?wsdl</url>-->
+                        <!--</schema>-->
+                    <!--</schemas>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
+
+            <!--plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>jaxb2-maven-plugin</artifactId>
+                <version>1.6</version>
+                <executions>
+                    <execution>
+                        <id>xjc</id>
+                        <goals>
+                            <goal>xjc</goal>
+                        </goals>
+                   </execution>
+                </executions>
+                <configuration>
+                    <schemaDirectory>${project.basedir}/src/main/resources/</schemaDirectory>
+                    <outputDirectory>${project.basedir}/src/main/java</outputDirectory>
+                    <clearOutputDir>false</clearOutputDir>
+                </configuration>
+            </plugin-->
+            
+        </plugins>
+    </build>
+
 </project>

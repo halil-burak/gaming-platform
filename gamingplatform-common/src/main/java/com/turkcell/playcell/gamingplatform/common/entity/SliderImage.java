@@ -10,7 +10,12 @@ import java.io.Serializable;
 @Data
 public class SliderImage extends BaseEntity implements Serializable {
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7176104672364125835L;
+
+	@ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "PLATFORM_TRANSLATION_ID")
     private PlatformTranslation platformTranslation;
 

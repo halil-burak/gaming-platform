@@ -12,7 +12,12 @@ import java.util.List;
 @Data
 public class PlatformTranslation extends BaseEntity implements Serializable {
 
-    @ManyToOne
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 2963330793195372531L;
+
+	@ManyToOne
     @JoinColumn(name = "PLATFORM_ID")
     private Platform platform;
 

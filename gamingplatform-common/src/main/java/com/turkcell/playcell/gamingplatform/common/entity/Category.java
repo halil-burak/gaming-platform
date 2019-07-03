@@ -14,7 +14,12 @@ import java.util.List;
 @Data
 public class Category extends BaseEntity implements Serializable {
 
-    @NotNull @NotEmpty
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5387069816875402651L;
+
+	@NotNull @NotEmpty
     @Column(name = "NAME", unique = true)
     private String name;
 

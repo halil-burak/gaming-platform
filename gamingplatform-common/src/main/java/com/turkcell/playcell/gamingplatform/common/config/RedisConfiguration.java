@@ -15,7 +15,6 @@ import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactor
 
 @EnableCaching
 @Configuration
-//@PropertySource("classpath:application-gamingplatform-api.properties")
 public class RedisConfiguration extends CachingConfigurerSupport {
 	
 	@Autowired

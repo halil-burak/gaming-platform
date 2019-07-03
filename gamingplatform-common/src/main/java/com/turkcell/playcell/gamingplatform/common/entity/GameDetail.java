@@ -14,7 +14,12 @@ import java.util.List;
 @Table(uniqueConstraints = @UniqueConstraint(columnNames={"GAME_ID", "PLATFORM_ID"}))
 public class GameDetail extends BaseEntity implements Serializable {
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 284498537583099438L;
+
+	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "GAME_ID")
     private Game game;
 

@@ -12,7 +12,12 @@ import java.time.Instant;
 @Data
 public class BaseEntity implements Serializable {
 
-    @Id
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1751782326567207931L;
+
+	@Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 

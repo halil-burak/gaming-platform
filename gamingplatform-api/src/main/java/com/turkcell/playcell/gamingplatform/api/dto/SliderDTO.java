@@ -5,14 +5,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
-import java.util.List;
-
 @Data
 @Builder
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class PlatformDTO {
-    private String name;
-    private List<SliderDTO> sliders;
-    private String logo;
+public class SliderDTO {
+    private String url;
+    private String externalUrl;
 }

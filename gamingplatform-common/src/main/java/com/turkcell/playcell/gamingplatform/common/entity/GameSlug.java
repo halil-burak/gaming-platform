@@ -7,9 +7,10 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
-@Entity
+@Getter
+@Setter
 @NoArgsConstructor
-@Data
+@Entity
 @Table(uniqueConstraints={@UniqueConstraint(columnNames = {"URL" , "PLATFORM_ID", "LANGUAGE_ID"})})
 public class GameSlug extends BaseEntity implements Serializable {
 

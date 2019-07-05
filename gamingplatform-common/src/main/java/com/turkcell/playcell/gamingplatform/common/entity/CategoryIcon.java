@@ -8,9 +8,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import java.io.Serializable;
 
-@Entity
+@Getter
+@Setter
 @NoArgsConstructor
-@Data
+@Entity
 public class CategoryIcon extends BaseEntity implements Serializable {
 
     /**

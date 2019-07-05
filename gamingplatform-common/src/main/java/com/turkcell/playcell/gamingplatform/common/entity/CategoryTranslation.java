@@ -7,9 +7,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
+@Getter
+@Setter
 @NoArgsConstructor
-@Data
+@Entity
 @Table(uniqueConstraints = @UniqueConstraint(columnNames={"NAME", "LANGUAGE_ID"}))
 public class CategoryTranslation extends BaseEntity implements Serializable {
 

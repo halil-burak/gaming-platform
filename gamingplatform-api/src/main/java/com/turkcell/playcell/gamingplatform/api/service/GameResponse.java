@@ -8,12 +8,10 @@ import java.util.Map;
 import com.turkcell.playcell.gamingplatform.api.dto.CategoryDTO;
 import com.turkcell.playcell.gamingplatform.api.dto.GameDTO;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor

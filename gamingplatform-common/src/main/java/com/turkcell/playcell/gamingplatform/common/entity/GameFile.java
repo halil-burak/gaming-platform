@@ -7,9 +7,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import java.io.Serializable;
 
-@Entity
+@Getter
+@Setter
 @NoArgsConstructor
-@Data
+@Entity
 public class GameFile extends BaseEntity implements Serializable{
 
     /**

@@ -7,10 +7,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Entity
 public class Image extends BaseEntity implements Serializable {
 
     /**

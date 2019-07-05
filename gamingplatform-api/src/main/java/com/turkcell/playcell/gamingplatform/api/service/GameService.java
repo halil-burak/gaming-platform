@@ -2,31 +2,20 @@ package com.turkcell.playcell.gamingplatform.api.service;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
 import com.turkcell.playcell.gamingplatform.api.config.ApplicationProperties;
 import com.turkcell.playcell.gamingplatform.api.util.GenerateTicket;
+import com.turkcell.playcell.gamingplatform.common.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.turkcell.playcell.gamingplatform.api.dto.*;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.turkcell.playcell.gamingplatform.api.dto.CategoryDTO;
-import com.turkcell.playcell.gamingplatform.common.entity.Category;
-import com.turkcell.playcell.gamingplatform.common.entity.CategorySlug;
-import com.turkcell.playcell.gamingplatform.common.entity.CategoryTranslation;
-import com.turkcell.playcell.gamingplatform.common.entity.Game;
-import com.turkcell.playcell.gamingplatform.common.entity.GameDetail;
-import com.turkcell.playcell.gamingplatform.common.entity.GameDetailTranslation;
-import com.turkcell.playcell.gamingplatform.common.entity.GameSlug;
-import com.turkcell.playcell.gamingplatform.common.entity.Tariff;
 import com.turkcell.playcell.gamingplatform.common.repository.CategoryRepository;
 import com.turkcell.playcell.gamingplatform.common.repository.CategorySlugRepository;
 import com.turkcell.playcell.gamingplatform.common.repository.CategoryTranslationRepository;
@@ -126,6 +115,11 @@ public class GameService implements IGameService {
             categoryDTO.setId(category.getId());
             categoryDTO.setName(category.getName());
             categoryDTO.setVisible(category.isVisible());
+
+            Optional<CategoryIcon> categoryIcon = category.getCategoryIcons().stream().filter(c -> c.getPlatform().getName().equalsIgnoreCase(platformName)).findAny();
+            if(categoryIcon.isPresent()){
+                categoryDTO.setIconUrl(categoryIcon.get().getImage().getCdnUrl().concat(categoryIcon.get().getImage().getPath()));
+            }
 
             CategoryTranslation ct = categoryTranslationRepository.findByLanguageShortNameEqualsIgnoreCaseAndCategoryId(language, category.getId());
             if (ct != null) {

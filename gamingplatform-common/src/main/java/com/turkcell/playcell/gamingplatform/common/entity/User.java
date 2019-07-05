@@ -7,10 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.io.Serializable;
 
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
 @Table(name = "CMS_USER")
-@NoArgsConstructor
-@Data
 public class User extends BaseEntity implements Serializable {
 
     /**

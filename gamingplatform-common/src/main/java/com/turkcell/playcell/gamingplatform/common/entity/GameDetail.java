@@ -8,9 +8,10 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
+@Getter
+@Setter
 @NoArgsConstructor
-@Data
+@Entity
 @Table(uniqueConstraints = @UniqueConstraint(columnNames={"GAME_ID", "PLATFORM_ID"}))
 public class GameDetail extends BaseEntity implements Serializable {
 

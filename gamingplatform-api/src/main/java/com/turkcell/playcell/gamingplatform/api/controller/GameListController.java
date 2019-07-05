@@ -19,9 +19,11 @@ import com.turkcell.playcell.gamingplatform.api.config.ApplicationProperties;
 import com.turkcell.playcell.gamingplatform.api.dto.GameUrlDTO;
 import com.turkcell.playcell.gamingplatform.api.enumtypes.ResponseCodeStrings;
 import com.turkcell.playcell.gamingplatform.api.response.DataResponse;
-import com.turkcell.playcell.gamingplatform.api.service.GameResponse;
-import com.turkcell.playcell.gamingplatform.api.service.GameService;
+import com.turkcell.playcell.gamingplatform.api.response.GameResponse;
+import com.turkcell.playcell.gamingplatform.api.response.PlatformResponse;
 import com.turkcell.playcell.gamingplatform.api.service.SubscriptionInfoService;
+import com.turkcell.playcell.gamingplatform.api.service.GameService;
+import com.turkcell.playcell.gamingplatform.api.service.PlatformService;
 import com.turkcell.playcell.gamingplatform.api.util.JWTToken;
 
 import lombok.RequiredArgsConstructor;
@@ -40,6 +42,8 @@ public class GameListController extends BaseController {
 	private final ApplicationProperties applicationProperties;
 	
 	private final JWTToken JWTTokenService;
+
+	private final PlatformService platformService;
 	
 	private final MessageSource messageSource;
 	
@@ -105,4 +109,17 @@ public class GameListController extends BaseController {
 		return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @GetMapping("/platforms/{pName}/info")
+	public ResponseEntity<Object> getPlatformInfo(@PathVariable(name = "pName") String pName, HttpServletRequest request) {
+    	PlatformResponse platformResponse = null;
+    	try {
+			platformResponse = platformService.getPlatformInfoByPlatformName(pName);
+		} catch (Exception ex) {
+			log.error("An error occurred during getPlatformInfo API... -> {}", ex);
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+    	DataResponse<Object> response = DataResponse.createResponse(platformResponse, true, ResponseCodeStrings.SUCCESS, pName + " Platform Information Successfully Provided");
+		return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 }

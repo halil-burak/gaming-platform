@@ -1,4 +1,4 @@
-package com.turkcell.playcell.gamingplatform.api.service;
+package com.turkcell.playcell.gamingplatform.api.response;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;

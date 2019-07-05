@@ -1,4 +1,4 @@
-package com.turkcell.playcell.gamingplatform.api.service;
+package com.turkcell.playcell.gamingplatform.api.response;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -8,12 +8,10 @@ import java.util.Map;
 import com.turkcell.playcell.gamingplatform.api.dto.CategoryDTO;
 import com.turkcell.playcell.gamingplatform.api.dto.GameDTO;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor

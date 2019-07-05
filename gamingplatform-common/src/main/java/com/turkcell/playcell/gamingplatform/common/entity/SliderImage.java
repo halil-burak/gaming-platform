@@ -5,9 +5,10 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 
-@Entity
+@Getter
+@Setter
 @NoArgsConstructor
-@Data
+@Entity
 public class SliderImage extends BaseEntity implements Serializable {
 
     /**

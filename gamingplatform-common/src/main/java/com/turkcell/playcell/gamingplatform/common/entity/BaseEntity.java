@@ -7,9 +7,10 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
 
-@MappedSuperclass
+@Getter
+@Setter
 @NoArgsConstructor
-@Data
+@MappedSuperclass
 public class BaseEntity implements Serializable {
 
     /**

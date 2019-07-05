@@ -22,4 +22,5 @@ public class CategoryDTO implements Serializable {
     private String slug;
     private boolean isVisible;
     private List<String> oldSlugs;
+    private String iconUrl;
 }

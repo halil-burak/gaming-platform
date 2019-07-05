@@ -26,7 +26,7 @@ import com.turkcell.playcell.gamingplatform.api.request.AuthorizationRequest;
 import com.turkcell.playcell.gamingplatform.api.response.DataResponse;
 import com.turkcell.playcell.gamingplatform.api.response.TokenResponse;
 import com.turkcell.playcell.gamingplatform.api.service.SubscriptionInfoService;
-import com.turkcell.playcell.gamingplatform.api.service.TariffService;
+import com.turkcell.playcell.gamingplatform.api.service.impl.TariffServiceImpl;
 import com.turkcell.playcell.gamingplatform.api.util.JWTToken;
 import com.turkcell.playcell.gamingplatform.common.entity.Tariff;
 import com.turkcell.playcell.gamingplatform.mobileconnect.model.MobileConnectUserInfoResponse;
@@ -45,7 +45,7 @@ public class UserApiController extends BaseController {
 	
 	private final SubscriptionInfoService subscriptionInfoService;
 	
-	private final TariffService tariffService;
+	private final TariffServiceImpl tariffService;
 	
 	private final JWTToken JWTTokenService;
 	

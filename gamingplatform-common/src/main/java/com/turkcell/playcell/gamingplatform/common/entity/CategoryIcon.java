@@ -2,16 +2,14 @@ package com.turkcell.playcell.gamingplatform.common.entity;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @Entity
+@Table(uniqueConstraints={@UniqueConstraint(name = "UK_CATEGORY_ICON", columnNames = {"PLATFORM_ID" , "IMAGE_ID", "CATEGORY_ID"})})
 public class CategoryIcon extends BaseEntity implements Serializable {
 
     /**

@@ -30,10 +30,6 @@ public class Language extends BaseEntity implements Serializable {
             inverseJoinColumns = { @JoinColumn(name = "PLATFORM_ID", referencedColumnName = "ID") })
     private List<Platform> platforms = new ArrayList<>();
 
-//    @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true)
-//    @JoinColumn(name = "PLATFORM_ID")
-//    private List<GameSlug> gameSlugs = new ArrayList<>();
-
     public Language(Long id) {
         super.setId(id);
     }

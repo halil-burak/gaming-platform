@@ -24,6 +24,7 @@
     	<module>gamingplatform-api</module>
         <module>gamingplatform-integration</module>
     	<module>gamingplatform-common</module>
+        <module>gamingplatform-cms</module>
     </modules>
 
     <dependencies>

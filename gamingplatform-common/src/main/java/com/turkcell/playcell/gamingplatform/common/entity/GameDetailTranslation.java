@@ -40,4 +40,14 @@ public class GameDetailTranslation extends BaseEntity{
             joinColumns = @JoinColumn(name = "GAME_DETAIL_TRANSLATION_ID"),
             inverseJoinColumns = @JoinColumn(name = "IMAGE_ID"))
     private List<Image> images = new ArrayList<>();
+
+    public void addGameSlug(GameSlug gameSlug) {
+        gameSlug.setGameDetailTranslation(this);
+        this.getGameSlugs().add(gameSlug);
+    }
+
+    public void removeGameSlug(GameSlug gameSlug) {
+        gameSlug.setGameDetailTranslation(null);
+        this.getGameSlugs().remove(gameSlug);
+    }
 }

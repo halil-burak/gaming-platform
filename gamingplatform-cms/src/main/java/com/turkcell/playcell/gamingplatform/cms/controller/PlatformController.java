@@ -4,6 +4,7 @@ import com.turkcell.playcell.gamingplatform.cms.dto.platform.PlatformCreateDTO;
 import com.turkcell.playcell.gamingplatform.cms.dto.platform.PlatformDTO;
 import com.turkcell.playcell.gamingplatform.cms.exception.FileDeleteException;
 import com.turkcell.playcell.gamingplatform.cms.service.PlatformService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,10 +13,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/platforms")
+@RequiredArgsConstructor
 public class PlatformController {
 
-    @Autowired
-    private PlatformService platformService;
+    private final PlatformService platformService;
 
     @PostMapping("")
     public Long savePlatform(@RequestBody @Valid PlatformCreateDTO platformCreateDTO) {

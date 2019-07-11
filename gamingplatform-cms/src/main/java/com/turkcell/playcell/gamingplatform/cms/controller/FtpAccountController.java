@@ -3,6 +3,7 @@ package com.turkcell.playcell.gamingplatform.cms.controller;
 import com.turkcell.playcell.gamingplatform.cms.dto.ftpAccount.FtpAccountCreateDTO;
 import com.turkcell.playcell.gamingplatform.cms.dto.ftpAccount.FtpAccountGetDTO;
 import com.turkcell.playcell.gamingplatform.cms.service.FtpAccountService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,10 +12,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/ftp-accounts")
+@RequiredArgsConstructor
 public class FtpAccountController {
 
-    @Autowired
-    private FtpAccountService ftpAccountService;
+    private final FtpAccountService ftpAccountService;
 
     @PostMapping("")
     public Long saveFfpAccount(@RequestBody @Valid FtpAccountCreateDTO ftpAccountCreateDTO) {

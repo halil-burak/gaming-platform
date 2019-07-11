@@ -6,6 +6,7 @@ import com.turkcell.playcell.gamingplatform.cms.exception.NotFoundException;
 import com.turkcell.playcell.gamingplatform.cms.service.TariffService;
 import com.turkcell.playcell.gamingplatform.common.entity.Tariff;
 import com.turkcell.playcell.gamingplatform.common.repository.TariffRepository;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,13 +17,12 @@ import java.util.stream.Collectors;
 
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class TariffServiceImpl implements TariffService {
 
-    @Autowired
-    TariffRepository tariffRepository;
+    private final TariffRepository tariffRepository;
 
-    @Autowired
-    ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
 
     @Override
     public Long saveTariff(TariffCreateDTO tariffCreateDTO) {

@@ -3,6 +3,7 @@ package com.turkcell.playcell.gamingplatform.cms.controller;
 import com.turkcell.playcell.gamingplatform.cms.dto.language.LanguageCreateDTO;
 import com.turkcell.playcell.gamingplatform.cms.dto.language.LanguageDTO;
 import com.turkcell.playcell.gamingplatform.cms.service.LanguageService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,10 +12,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/languages")
+@RequiredArgsConstructor
 public class LanguageController {
 
-    @Autowired
-    private LanguageService languageService;
+    private final LanguageService languageService;
 
     @PostMapping("")
     public Long saveLanguage(@RequestBody @Valid LanguageCreateDTO languageCreateDTO) {

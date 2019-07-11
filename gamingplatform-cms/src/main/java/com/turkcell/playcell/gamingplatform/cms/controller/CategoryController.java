@@ -6,18 +6,19 @@ import com.turkcell.playcell.gamingplatform.cms.dto.category.CategoryGetDTO;
 import com.turkcell.playcell.gamingplatform.cms.dto.category.CategoryLightDTO;
 import com.turkcell.playcell.gamingplatform.cms.exception.FileDeleteException;
 import com.turkcell.playcell.gamingplatform.cms.service.CategoryService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 
+
 @RestController
 @RequestMapping("/categories")
+@RequiredArgsConstructor
 public class CategoryController {
 
-    @Autowired
-    CategoryService categoryService;
+    private final CategoryService categoryService;
 
     @PostMapping("")
     public Long saveCategory(@RequestBody @Valid CategoryCreateDTO categoryCreateDTO) {

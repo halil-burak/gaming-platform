@@ -9,6 +9,7 @@ import com.turkcell.playcell.gamingplatform.cms.service.GameService;
 import com.turkcell.playcell.gamingplatform.cms.util.StringUtils;
 import com.turkcell.playcell.gamingplatform.common.entity.*;
 import com.turkcell.playcell.gamingplatform.common.repository.*;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -23,33 +24,25 @@ import java.util.stream.Collectors;
 
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class GameServiceImpl implements GameService {
 
-    @Autowired
-    ApplicationProperties applicationProperties;
+    private final ApplicationProperties applicationProperties;
 
-    @Autowired
-    GameRepository gameRepository;
+    private final GameRepository gameRepository;
 
-    @Autowired
-    CategoryRepository categoryRepository;
+    private final CategoryRepository categoryRepository;
 
-    @Autowired
-    LanguageRepository languageRepository;
+    private final LanguageRepository languageRepository;
 
-    @Autowired
-    private ImageRepository imageRepository;
+    private final ImageRepository imageRepository;
 
-    @Autowired
-    GameDetailRepository gameDetailRepository;
+    private final GameDetailRepository gameDetailRepository;
 
-    @Autowired
-    ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
 
-    @PersistenceContext
-    private EntityManager entityManager;
+    private final EntityManager entityManager;
 
-    @Override
     public Long saveGame( GameCreateDTO gameCreateDTO) {
         Game game = new Game();
         game.setName(gameCreateDTO.getName());

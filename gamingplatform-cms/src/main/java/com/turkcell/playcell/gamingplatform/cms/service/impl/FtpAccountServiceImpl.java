@@ -6,6 +6,7 @@ import com.turkcell.playcell.gamingplatform.cms.exception.NotFoundException;
 import com.turkcell.playcell.gamingplatform.cms.service.FtpAccountService;
 import com.turkcell.playcell.gamingplatform.common.entity.FtpAccount;
 import com.turkcell.playcell.gamingplatform.common.repository.FtpAccountRepository;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,16 +19,15 @@ import java.util.stream.Collectors;
 
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class FtpAccountServiceImpl implements FtpAccountService {
 
-    @Autowired
-    private FtpAccountRepository ftpAccountRepository;
+    private final FtpAccountRepository ftpAccountRepository;
 
-    @Autowired
-    private ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
 
-    @PersistenceContext
-    private EntityManager entityManager;
+    //@PersistenceContext
+    private final EntityManager entityManager;
 
     @Override
     public Long saveFfpAccount(FtpAccountCreateDTO ftpAccountCreateDTO) {

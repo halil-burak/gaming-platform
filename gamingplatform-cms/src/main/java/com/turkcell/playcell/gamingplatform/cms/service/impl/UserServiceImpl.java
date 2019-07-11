@@ -9,6 +9,7 @@ import com.turkcell.playcell.gamingplatform.cms.security.JwtProvider;
 import com.turkcell.playcell.gamingplatform.cms.service.UserService;
 import com.turkcell.playcell.gamingplatform.common.entity.User;
 import com.turkcell.playcell.gamingplatform.common.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -24,19 +25,16 @@ import java.util.stream.Collectors;
 
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    @Autowired
-    private JwtProvider jwtProvider;
+    private final JwtProvider jwtProvider;
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
-    @Autowired
-    private ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
 
-    @Autowired
-    PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public String login(UserLoginDTO userLoginDTO) throws InvalidPasswordException {

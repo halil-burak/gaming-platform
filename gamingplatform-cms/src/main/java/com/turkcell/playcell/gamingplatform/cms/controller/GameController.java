@@ -3,6 +3,7 @@ package com.turkcell.playcell.gamingplatform.cms.controller;
 import com.turkcell.playcell.gamingplatform.cms.dto.PageDTO;
 import com.turkcell.playcell.gamingplatform.cms.dto.game.*;
 import com.turkcell.playcell.gamingplatform.cms.service.GameService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,10 +12,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/games")
+@RequiredArgsConstructor
 public class GameController {
 
-    @Autowired
-    private GameService gameService;
+    private final GameService gameService;
 
     @PostMapping("")
     public Long saveGame(@RequestBody @Valid GameCreateDTO gameCreateDTO) {
@@ -54,9 +55,4 @@ public class GameController {
         gameService.deleteGame(id);
     }
 
-
-//    @PutMapping("/{gameId}/platforms/{platformId}/publish")
-//    public void publishGame(@PathVariable(name = "gameId") Long gameId, @PathVariable(name = "platformId") Long platformId, @RequestBody PublishCreateDTO publishCreateDTO) {
-//        gameService.publishGame(gameId, platformId, publishCreateDTO);
-//    }
 }

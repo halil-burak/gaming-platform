@@ -6,6 +6,7 @@ import com.turkcell.playcell.gamingplatform.cms.exception.FileDeleteException;
 import com.turkcell.playcell.gamingplatform.cms.exception.FileUploadException;
 import com.turkcell.playcell.gamingplatform.cms.exception.UnzipException;
 import com.turkcell.playcell.gamingplatform.cms.service.FileUploadService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -14,10 +15,10 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping
+@RequiredArgsConstructor
 public class FileUploadController {
 
-    @Autowired
-    private FileUploadService fileUploadService;
+    private final FileUploadService fileUploadService;
 
     @PostMapping("/image")
     public ImageDTO saveImage(@RequestParam(value = "sizeId", required = false) Long sizeId, @RequestParam("ftpAccountId") Long ftpAccountId, @RequestParam("file") MultipartFile file) throws FileUploadException {

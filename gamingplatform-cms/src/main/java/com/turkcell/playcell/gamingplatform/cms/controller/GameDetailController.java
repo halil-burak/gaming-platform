@@ -6,6 +6,7 @@ import com.turkcell.playcell.gamingplatform.cms.dto.game.GameDetailDTO;
 import com.turkcell.playcell.gamingplatform.cms.dto.game.GameDetailPublishDTO;
 import com.turkcell.playcell.gamingplatform.cms.dto.game.GameDetailUploadDTO;
 import com.turkcell.playcell.gamingplatform.cms.service.GameDetailService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,10 +14,10 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/gameDetails")
+@RequiredArgsConstructor
 public class GameDetailController {
 
-    @Autowired
-    GameDetailService gameDetailService;
+    private final GameDetailService gameDetailService;
 
     @PostMapping("")
     public Long saveGameDetail(@RequestBody @Valid GameDetailCreateDTO gameDetailCreateDTO){

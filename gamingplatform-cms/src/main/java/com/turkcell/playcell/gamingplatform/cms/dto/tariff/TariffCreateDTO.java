@@ -1,8 +1,13 @@
 package com.turkcell.playcell.gamingplatform.cms.dto.tariff;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+@Getter
+@Setter
 public class TariffCreateDTO {
 
     @NotNull
@@ -24,51 +29,4 @@ public class TariffCreateDTO {
     @NotNull
     private Long provisioningId;
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getGrade() {
-        return grade;
-    }
-
-    public String getLabel() {
-        return label;
-    }
-
-    public void setLabel(String label) {
-        this.label = label;
-    }
-
-    public String getPackageName() {
-        return packageName;
-    }
-
-    public void setPackageName(String packageName) {
-        this.packageName = packageName;
-    }
-
-    public Long getOfferId() {
-        return offerId;
-    }
-
-    public void setOfferId(Long offerId) {
-        this.offerId = offerId;
-    }
-
-    public Long getProvisioningId() {
-        return provisioningId;
-    }
-
-    public void setProvisioningId(Long provisioningId) {
-        this.provisioningId = provisioningId;
-    }
-
-    public void setGrade(int grade) {
-        this.grade = grade;
-    }
 }

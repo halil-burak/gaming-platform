@@ -3,7 +3,7 @@ package com.turkcell.playcell.gamingplatform.cms.controller;
 import com.turkcell.playcell.gamingplatform.cms.dto.tariff.TariffCreateDTO;
 import com.turkcell.playcell.gamingplatform.cms.dto.tariff.TariffDTO;
 import com.turkcell.playcell.gamingplatform.cms.service.TariffService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -11,10 +11,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/tariffs")
+@RequiredArgsConstructor
 public class TariffController {
 
-    @Autowired
-    private TariffService tariffService;
+    private final TariffService tariffService;
 
     @PostMapping("")
     public Long saveTariff(@RequestBody @Valid TariffCreateDTO tariffCreateDTO) {

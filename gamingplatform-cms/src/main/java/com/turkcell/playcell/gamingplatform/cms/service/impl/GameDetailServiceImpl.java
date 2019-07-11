@@ -10,6 +10,7 @@ import com.turkcell.playcell.gamingplatform.cms.service.GameDetailService;
 import com.turkcell.playcell.gamingplatform.cms.util.StringUtils;
 import com.turkcell.playcell.gamingplatform.common.entity.*;
 import com.turkcell.playcell.gamingplatform.common.repository.*;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -24,31 +25,24 @@ import java.util.stream.Collectors;
 
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class GameDetailServiceImpl implements GameDetailService {
 
-    @Autowired
-    GameDetailRepository gameDetailRepository;
+    private final GameDetailRepository gameDetailRepository;
 
-    @Autowired
-    GameDetailTranslationRepository gameDetailTranslationRepository;
+    private final GameDetailTranslationRepository gameDetailTranslationRepository;
 
-    @Autowired
-    GameRepository gameRepository;
+    private final GameRepository gameRepository;
 
-    @Autowired
-    CategoryRepository categoryRepository;
+    private final CategoryRepository categoryRepository;
 
-    @Autowired
-    ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
 
-    @Autowired
-    GameSlugRepository gameSlugRepository;
+    private final GameSlugRepository gameSlugRepository;
 
-    @Autowired
-    private ApplicationProperties applicationProperties;
+    private final ApplicationProperties applicationProperties;
 
-    @Autowired
-    private EntityManager entityManager;
+    private final EntityManager entityManager;
 
 
     @Override

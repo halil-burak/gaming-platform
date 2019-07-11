@@ -1,8 +1,14 @@
 package com.turkcell.playcell.gamingplatform.cms.dto.language;
 
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.stereotype.Service;
+
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+@Getter
+@Setter
 public class LanguageCreateDTO {
 
     @NotNull
@@ -12,21 +18,5 @@ public class LanguageCreateDTO {
     @NotNull
     @NotEmpty
     private String shortName;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getShortName() {
-        return shortName;
-    }
-
-    public void setShortName(String shortName) {
-        this.shortName = shortName;
-    }
 
 }

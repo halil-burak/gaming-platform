@@ -16,6 +16,7 @@ import com.turkcell.playcell.gamingplatform.common.entity.Image;
 import com.turkcell.playcell.gamingplatform.common.repository.FtpAccountRepository;
 import com.turkcell.playcell.gamingplatform.common.repository.GameFileRepository;
 import com.turkcell.playcell.gamingplatform.common.repository.ImageRepository;
+import lombok.RequiredArgsConstructor;
 import net.lingala.zip4j.core.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
 import org.modelmapper.ModelMapper;
@@ -33,22 +34,18 @@ import java.util.*;
 
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class FileUploadServiceImpl implements FileUploadService {
 
-    @Autowired
-    private ImageRepository imageRepository;
+    private final ImageRepository imageRepository;
 
-    @Autowired
-    private GameFileRepository gameFileRepository;
+    private final GameFileRepository gameFileRepository;
 
-    @Autowired
-    private FtpAccountRepository ftpAccountRepository;
+    private final FtpAccountRepository ftpAccountRepository;
 
-    @Autowired
-    private ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
 
-    @Autowired
-    ApplicationProperties applicationProperties;
+    private final ApplicationProperties applicationProperties;
 
     @Override
     public ImageDTO saveImage(Long sizeId, Long ftpAccountId, MultipartFile file) throws FileUploadException {

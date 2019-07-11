@@ -4,6 +4,7 @@ import com.turkcell.playcell.gamingplatform.cms.dto.ComplaintDTO;
 import com.turkcell.playcell.gamingplatform.cms.service.ComplaintService;
 import com.turkcell.playcell.gamingplatform.common.entity.Complaint;
 import com.turkcell.playcell.gamingplatform.common.repository.ComplaintRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,10 +12,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class ComplaintServiceImpl implements ComplaintService {
 
-    @Autowired
-    private ComplaintRepository complaintRepository;
+    private final ComplaintRepository complaintRepository;
 
     @Override
     public List<ComplaintDTO> getComplaints() {

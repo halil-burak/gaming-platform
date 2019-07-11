@@ -7,6 +7,7 @@ import com.turkcell.playcell.gamingplatform.cms.service.LanguageService;
 import com.turkcell.playcell.gamingplatform.common.entity.Language;
 import com.turkcell.playcell.gamingplatform.common.entity.Platform;
 import com.turkcell.playcell.gamingplatform.common.repository.LanguageRepository;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,13 +18,12 @@ import java.util.stream.Collectors;
 
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class LanguageServiceImpl implements LanguageService {
 
-    @Autowired
-    private LanguageRepository languageRepository;
+    private final LanguageRepository languageRepository;
 
-    @Autowired
-    ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
 
     @Override
     public Long saveLanguage(LanguageCreateDTO languageCreateDTO) {

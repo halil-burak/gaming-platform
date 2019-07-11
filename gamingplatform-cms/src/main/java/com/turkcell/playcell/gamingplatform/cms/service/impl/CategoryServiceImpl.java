@@ -10,6 +10,7 @@ import com.turkcell.playcell.gamingplatform.common.entity.*;
 import com.turkcell.playcell.gamingplatform.common.repository.CategoryRepository;
 import com.turkcell.playcell.gamingplatform.common.repository.CategoryTranslationRepository;
 import com.turkcell.playcell.gamingplatform.common.repository.GameDetailRepository;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,22 +21,18 @@ import java.util.stream.Collectors;
 
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class CategoryServiceImpl implements CategoryService {
 
-    @Autowired
-    CategoryRepository categoryRepository;
+    private final CategoryRepository categoryRepository;
 
-    @Autowired
-    GameDetailRepository gameDetailRepository;
+    private final GameDetailRepository gameDetailRepository;
 
-    @Autowired
-    ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
 
-    @Autowired
-    CategoryTranslationRepository categoryTranslationRepository;
+    private final CategoryTranslationRepository categoryTranslationRepository;
 
-    @Autowired
-    FileUploadService fileUploadService;
+    private final FileUploadService fileUploadService;
 
     @Override
     public Long saveCategory(CategoryCreateDTO categoryCreateDTO) {

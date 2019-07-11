@@ -1,5 +1,10 @@
 package com.turkcell.playcell.gamingplatform.cms.dto.slider_logo;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class SliderGetDTO {
     private Long id;
 
@@ -7,27 +12,4 @@ public class SliderGetDTO {
 
     private String externalUrl;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public String getExternalUrl() {
-        return externalUrl;
-    }
-
-    public void setExternalUrl(String externalUrl) {
-        this.externalUrl = externalUrl;
-    }
 }

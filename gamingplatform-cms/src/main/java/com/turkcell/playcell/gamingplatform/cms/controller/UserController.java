@@ -5,6 +5,7 @@ import com.turkcell.playcell.gamingplatform.cms.dto.user.UserGetDTO;
 import com.turkcell.playcell.gamingplatform.cms.dto.user.UserLoginDTO;
 import com.turkcell.playcell.gamingplatform.cms.exception.InvalidPasswordException;
 import com.turkcell.playcell.gamingplatform.cms.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,11 +14,10 @@ import java.security.Principal;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 public class UserController {
 
-    @Autowired
-    private UserService userService;
-
+    private final UserService userService;
 
     @PostMapping(path = "/login")
     public String login(@RequestBody @Valid UserLoginDTO userLoginDTO) throws InvalidPasswordException {

@@ -11,6 +11,7 @@ import com.turkcell.playcell.gamingplatform.cms.service.FileUploadService;
 import com.turkcell.playcell.gamingplatform.cms.service.PlatformService;
 import com.turkcell.playcell.gamingplatform.common.entity.*;
 import com.turkcell.playcell.gamingplatform.common.repository.*;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,28 +22,22 @@ import java.util.stream.Collectors;
 
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class PlatformServiceImpl implements PlatformService {
 
-    @Autowired
-    ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
 
-    @Autowired
-    private PlatformRepository platformRepository;
+    private final PlatformRepository platformRepository;
 
-    @Autowired
-    private LanguageRepository languageRepository;
+    private final LanguageRepository languageRepository;
 
-    @Autowired
-    private ImageRepository imageRepository;
+    private final ImageRepository imageRepository;
 
-    @Autowired
-    private PlatformTranslationRepository platformTranslationRepository;
+    private final PlatformTranslationRepository platformTranslationRepository;
 
-    @Autowired
-    private SliderImageRepository sliderImageRepository;
+    private final SliderImageRepository sliderImageRepository;
 
-    @Autowired
-    private FileUploadService fileUploadService;
+    private final FileUploadService fileUploadService;
 
     @Override
     public Long savePlatform(PlatformCreateDTO platformCreateDTO) {

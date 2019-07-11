@@ -1,23 +1,13 @@
 package com.turkcell.playcell.gamingplatform.cms.dto.slider_logo;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class LogoDTO {
     private Long id;
 
     private String url;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
 }

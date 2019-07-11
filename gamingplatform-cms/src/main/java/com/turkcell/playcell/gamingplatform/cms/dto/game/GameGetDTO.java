@@ -1,7 +1,12 @@
 package com.turkcell.playcell.gamingplatform.cms.dto.game;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.List;
 
+@Getter
+@Setter
 public class GameGetDTO {
 
     private Long id;
@@ -12,35 +17,4 @@ public class GameGetDTO {
 
     private List<GameDetailLightDTO> gameDetails;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getScore() {
-        return score;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
-    }
-
-    public List<GameDetailLightDTO> getGameDetails() {
-        return gameDetails;
-    }
-
-    public void setGameDetails(List<GameDetailLightDTO> gameDetails) {
-        this.gameDetails = gameDetails;
-    }
 }

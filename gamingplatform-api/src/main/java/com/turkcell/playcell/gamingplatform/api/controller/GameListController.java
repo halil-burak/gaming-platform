@@ -45,16 +45,17 @@ public class GameListController extends BaseController {
 	
     @GetMapping("/platforms/{platformName}/games/{slug}")
     public ResponseEntity<Object> getGame(@PathVariable(name = "platformName") String platformName, @PathVariable(name = "slug") String slug, 
-    								HttpServletRequest request, HttpServletResponse hresponse,
-    								@RequestHeader(name="Accept-Language",required = false) Locale locale) {
+    								HttpServletRequest request, HttpServletResponse hresponse){
+    								//@RequestHeader(name="Accept-Language", required = false, defaultValue="tr") Locale locale) {
     	
     	try {
-		    
+    		
 			String tempToken = super.getAuthorizationHeader(request);
 			String language = super.extractLanguageCookie(request);
 			String userTariff = "Free";
 			
-			log.info(language);
+			String acceptLanguage = super.checkAcceptLanguageHeader(request);
+			log.info(acceptLanguage);
 			
 			if (!ObjectUtils.isEmpty(tempToken)) {
 				
@@ -73,8 +74,9 @@ public class GameListController extends BaseController {
 				
 			if (ObjectUtils.isEmpty(gameUrlDTO.getUrl())) {
 					
-				DataResponse<Object> response = DataResponse.createResponse(gameUrlDTO, true, ResponseCodeStrings.GAME_URL_NULL, 
-						messageSource.getMessage("game.url.null", null, ObjectUtils.isEmpty(locale) ? applicationProperties.getLocaleLanguage() : locale));
+				DataResponse<Object> response = DataResponse.createResponse(gameUrlDTO, true, ResponseCodeStrings.GAME_URL_NULL,
+						messageSource.getMessage("game.url.null", null, new Locale(acceptLanguage)));
+						//messageSource.getMessage("game.url.null", null, ObjectUtils.isEmpty(locale) ? applicationProperties.getLocaleLanguage() : locale));
 				return new ResponseEntity<>(response, HttpStatus.OK);
 			}
 		        

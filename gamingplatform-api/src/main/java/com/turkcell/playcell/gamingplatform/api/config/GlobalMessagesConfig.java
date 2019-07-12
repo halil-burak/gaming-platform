@@ -57,7 +57,7 @@ public class GlobalMessagesConfig implements WebMvcConfigurer {
     @Bean
     public SessionLocaleResolver localeResolver(){
     	SessionLocaleResolver localResolver = new SessionLocaleResolver();
-    	localResolver.setDefaultLocale(new Locale("tr"));
+    	localResolver.setDefaultLocale(new Locale("tr", "tr-TR"));
     	log.info("localResolver is set to Locale tr.");
     	return localResolver;
     }

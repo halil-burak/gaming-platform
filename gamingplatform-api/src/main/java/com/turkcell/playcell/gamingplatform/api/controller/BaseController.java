@@ -39,6 +39,29 @@ public class BaseController {
 		return false;
 	}
 	
+	protected String checkAcceptLanguageHeader(HttpServletRequest request) {
+		
+        String acceptLang = request.getHeader("Accept-Language");
+        
+        log.info("checkAcceptLanguageHeader : " + acceptLang);
+
+        if (acceptLang != null) {
+        	
+        	if (acceptLang.contains(";")) {
+        		String [] authTokenParts = acceptLang.split(";");	
+        		acceptLang = authTokenParts[0];
+        	}
+
+        	if (acceptLang.contains("-")) {
+        		return acceptLang.substring(0, acceptLang.indexOf("-"));
+        	} else {
+        		return acceptLang;
+        	}
+        }
+
+        return applicationProperties.getLocaleLanguage().toLanguageTag();
+	}
+	
 	protected boolean checkAuthorizationHeader(HttpServletRequest request) {
 		
         String authHeader = request.getHeader("Authorization");

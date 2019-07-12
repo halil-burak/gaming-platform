@@ -29,7 +29,6 @@ public enum SomChannelType {
     }
 
     public static SomChannelType  getType(String typeString) {
-        // todo : test
         SomChannelType type = lookup.get(typeString);
         return type == null ? SomChannelType.ANDROID : type;
     }

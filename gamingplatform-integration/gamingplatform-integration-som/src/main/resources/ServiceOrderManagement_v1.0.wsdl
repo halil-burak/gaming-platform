@@ -1,0 +1,279 @@
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://extranet.turkcell.com/ordermanagement/processes/serviceordermanagement/ServiceOrderManagement_v1.0" xmlns:xmime="http://www.w3.org/2005/05/xmlmime" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://extranet.turkcell.com/ordermanagement/processes/serviceordermanagement/ServiceOrderManagementTypes" targetNamespace="http://extranet.turkcell.com/ordermanagement/processes/serviceordermanagement/ServiceOrderManagement_v1.0" name="ServiceOrderManagement">
+<wsdl:types>
+<xs:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xs:import namespace="http://extranet.turkcell.com/ordermanagement/processes/serviceordermanagement/ServiceOrderManagementTypes" schemaLocation="http://inka-om-stb.turkcell.com.tr:80/ServiceOrderManagement/ServiceOrderManagement_v1.0?xsd=1"/>
+</xs:schema>
+<xs:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://extranet.turkcell.com/ordermanagement/processes/serviceordermanagement/ServiceOrderManagement_v1.0">
+<xs:element name="ServiceOrderManagementRequestException" type="xs:string"/>
+</xs:schema>
+<xs:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://extranet.turkcell.com/ordermanagement/processes/serviceordermanagement/ServiceOrderManagement_v1.0">
+<xs:element name="NoApprovalResultFoundException" type="xs:string"/>
+</xs:schema>
+<xs:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://extranet.turkcell.com/ordermanagement/processes/serviceordermanagement/ServiceOrderManagement_v1.0">
+<xs:element name="NoPayerMsisdnInfoFoundException" type="xs:string"/>
+</xs:schema>
+<xs:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://extranet.turkcell.com/ordermanagement/processes/serviceordermanagement/ServiceOrderManagement_v1.0">
+<xs:element name="NoUserMsisdnInfoFoundException" type="xs:string"/>
+</xs:schema>
+<xs:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://extranet.turkcell.com/ordermanagement/processes/serviceordermanagement/ServiceOrderManagement_v1.0">
+<xs:element name="NoSubactionIdFoundException" type="xs:string"/>
+</xs:schema>
+</wsdl:types>
+<wsdl:message name="CreateOrderInputMessage">
+<wsdl:part element="xsd:CreateOrderRequest" name="requestCreateOrder"/>
+</wsdl:message>
+<wsdl:message name="CreateOrderOutputMessage">
+<wsdl:part element="xsd:ServiceOrderManagementResponse" name="responseOrder"/>
+</wsdl:message>
+<wsdl:message name="SubmitOrderInputMessage">
+<wsdl:part element="xsd:SubmitOrderRequest" name="requestSubmitOrder"/>
+</wsdl:message>
+<wsdl:message name="SubmitOrderOutputMessage">
+<wsdl:part element="xsd:ServiceOrderManagementResponse" name="responseOrder"/>
+</wsdl:message>
+<wsdl:message name="ValidateInputMessage">
+<wsdl:part element="xsd:ValidateRequest" name="requestValidate"/>
+</wsdl:message>
+<wsdl:message name="ValidateOutputMessage">
+<wsdl:part element="xsd:ServiceOrderManagementResponse" name="responseOrder"/>
+</wsdl:message>
+<wsdl:message name="SOCallBackForServiceOrderManagementInputMessage">
+<wsdl:part element="xsd:SOCallBackForServiceOrderManagementRequest" name="soCallBackForServiceOrderManagementRequest"/>
+</wsdl:message>
+<wsdl:message name="SOCallBackForServiceOrderManagementOutputMessage">
+<wsdl:part element="xsd:SOCallBackForServiceOrderManagementResponse" name="soCallBackForServiceOrderManagementResponse"/>
+</wsdl:message>
+<wsdl:message name="SendApprovalResultInputMessage">
+<wsdl:part element="xsd:SendApprovalResultRequest" name="sendApprovalResultRequest"/>
+</wsdl:message>
+<wsdl:message name="SendApprovalResultOutputMessage">
+<wsdl:part element="xsd:ServiceOrderManagementResponse" name="sendApprovalResultResponse"/>
+</wsdl:message>
+<wsdl:message name="LifeCycleUpdateInputMessage">
+<wsdl:part element="xsd:LifeCycleUpdateRequest" name="lifeCycleUpdateRequest"/>
+</wsdl:message>
+<wsdl:message name="LifeCycleUpdateOutputMessage">
+<wsdl:part element="xsd:ServiceOrderManagementResponse" name="responseOrder"/>
+</wsdl:message>
+<wsdl:message name="AccountUpdateInputMessage">
+<wsdl:part element="xsd:AccountUpdateRequest" name="AccountUpdateRequest"/>
+</wsdl:message>
+<wsdl:message name="AccountUpdateOutputMessage">
+<wsdl:part element="xsd:ServiceOrderManagementResponse" name="responseOrder"/>
+</wsdl:message>
+<wsdl:message name="SendApprovalResultWithPaymentDetailInputMessage">
+<wsdl:part element="xsd:SendApprovalResultWithPaymentDetailRequest" name="sendApprovalResultWithPaymentDetailRequest"/>
+</wsdl:message>
+<wsdl:message name="SendApprovalResultWithPaymentDetailOutputMessage">
+<wsdl:part element="xsd:ServiceOrderManagementResponse" name="sendApprovalResultWithPaymentDetailResponse"/>
+</wsdl:message>
+<wsdl:message name="ServiceOrderManagementRequestException">
+<wsdl:part element="tns:ServiceOrderManagementRequestException" name="error"/>
+</wsdl:message>
+<wsdl:message name="NoApprovalResultFoundException">
+<wsdl:part element="tns:NoApprovalResultFoundException" name="error"/>
+</wsdl:message>
+<wsdl:message name="NoPayerMsisdnInfoFoundException">
+<wsdl:part element="tns:NoPayerMsisdnInfoFoundException" name="error"/>
+</wsdl:message>
+<wsdl:message name="NoUserMsisdnInfoFoundException">
+<wsdl:part element="tns:NoUserMsisdnInfoFoundException" name="error"/>
+</wsdl:message>
+<wsdl:message name="NoSubactionIdFoundException">
+<wsdl:part element="tns:NoSubactionIdFoundException" name="error"/>
+</wsdl:message>
+<wsdl:portType name="ServiceOrderManagement">
+<wsdl:operation name="createOrder">
+<wsdl:documentation>
+Create Order @autopilot.sla.success 850000 @autopilot.sla.exception 850000
+</wsdl:documentation>
+<wsdl:input message="tns:CreateOrderInputMessage"/>
+<wsdl:output message="tns:CreateOrderOutputMessage"/>
+<wsdl:fault message="tns:ServiceOrderManagementRequestException" name="fault1"/>
+</wsdl:operation>
+<wsdl:operation name="submitOrder">
+<wsdl:documentation>
+Submit Order @autopilot.sla.success 950000 @autopilot.sla.exception 950000
+</wsdl:documentation>
+<wsdl:input message="tns:SubmitOrderInputMessage"/>
+<wsdl:output message="tns:SubmitOrderOutputMessage"/>
+<wsdl:fault message="tns:ServiceOrderManagementRequestException" name="fault1"/>
+</wsdl:operation>
+<wsdl:operation name="validate">
+<wsdl:documentation>
+Validate @autopilot.sla.success 850000 @autopilot.sla.exception 850000
+</wsdl:documentation>
+<wsdl:input message="tns:ValidateInputMessage"/>
+<wsdl:output message="tns:ValidateOutputMessage"/>
+<wsdl:fault message="tns:ServiceOrderManagementRequestException" name="fault1"/>
+</wsdl:operation>
+<wsdl:operation name="soCallBackForServiceOrderManagement">
+<wsdl:documentation>
+SOCallBackForServiceOrderManagement @autopilot.sla.success 850000 @autopilot.sla.exception 850000
+</wsdl:documentation>
+<wsdl:input message="tns:SOCallBackForServiceOrderManagementInputMessage"/>
+<wsdl:output message="tns:SOCallBackForServiceOrderManagementOutputMessage"/>
+<wsdl:fault message="tns:ServiceOrderManagementRequestException" name="fault1"/>
+</wsdl:operation>
+<wsdl:operation name="sendApprovalResult">
+<wsdl:documentation>
+Send Approval Result @autopilot.sla.success 850000 @autopilot.sla.exception 850000
+</wsdl:documentation>
+<wsdl:input message="tns:SendApprovalResultInputMessage"/>
+<wsdl:output message="tns:SendApprovalResultOutputMessage"/>
+<wsdl:fault message="tns:ServiceOrderManagementRequestException" name="fault1"/>
+<wsdl:fault message="tns:NoApprovalResultFoundException" name="fault2"/>
+</wsdl:operation>
+<wsdl:operation name="lifeCycleUpdate">
+<wsdl:documentation>
+lifeCycleUpdate @autopilot.sla.success 850000 @autopilot.sla.exception 850000
+</wsdl:documentation>
+<wsdl:input message="tns:LifeCycleUpdateInputMessage"/>
+<wsdl:output message="tns:LifeCycleUpdateOutputMessage"/>
+<wsdl:fault message="tns:ServiceOrderManagementRequestException" name="fault1"/>
+<wsdl:fault message="tns:NoPayerMsisdnInfoFoundException" name="fault2"/>
+<wsdl:fault message="tns:NoUserMsisdnInfoFoundException" name="fault3"/>
+<wsdl:fault message="tns:NoSubactionIdFoundException" name="fault4"/>
+</wsdl:operation>
+<wsdl:operation name="accountUpdate">
+<wsdl:documentation>
+accountUpdate @autopilot.sla.success 850000 @autopilot.sla.exception 850000
+</wsdl:documentation>
+<wsdl:input message="tns:AccountUpdateInputMessage"/>
+<wsdl:output message="tns:AccountUpdateOutputMessage"/>
+<wsdl:fault message="tns:ServiceOrderManagementRequestException" name="fault1"/>
+<wsdl:fault message="tns:NoUserMsisdnInfoFoundException" name="fault2"/>
+<wsdl:fault message="tns:NoSubactionIdFoundException" name="fault3"/>
+</wsdl:operation>
+<wsdl:operation name="sendApprovalResultWithPaymentDetail">
+<wsdl:documentation>
+SendApprovalResultWithPaymentDetail @autopilot.sla.success 850000 @autopilot.sla.exception 850000
+</wsdl:documentation>
+<wsdl:input message="tns:SendApprovalResultWithPaymentDetailInputMessage"/>
+<wsdl:output message="tns:SendApprovalResultWithPaymentDetailOutputMessage"/>
+<wsdl:fault message="tns:ServiceOrderManagementRequestException" name="fault1"/>
+</wsdl:operation>
+</wsdl:portType>
+<wsdl:binding name="ServiceOrderManagement_Binding" type="tns:ServiceOrderManagement">
+<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+<wsdl:operation name="createOrder">
+<soap:operation soapAction="createOrder"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+<wsdl:fault name="fault1">
+<soap:fault name="fault1" use="literal"/>
+</wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="submitOrder">
+<soap:operation soapAction="submitOrder"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+<wsdl:fault name="fault1">
+<soap:fault name="fault1" use="literal"/>
+</wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="validate">
+<soap:operation soapAction="validate"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+<wsdl:fault name="fault1">
+<soap:fault name="fault1" use="literal"/>
+</wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="soCallBackForServiceOrderManagement">
+<soap:operation soapAction="soCallBackForServiceOrderManagement"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+<wsdl:fault name="fault1">
+<soap:fault name="fault1" use="literal"/>
+</wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="sendApprovalResult">
+<soap:operation soapAction="sendApprovalResult"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+<wsdl:fault name="fault1">
+<soap:fault name="fault1" use="literal"/>
+</wsdl:fault>
+<wsdl:fault name="fault2">
+<soap:fault name="fault2" use="literal"/>
+</wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="lifeCycleUpdate">
+<soap:operation soapAction="lifeCycleUpdate"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+<wsdl:fault name="fault1">
+<soap:fault name="fault1" use="literal"/>
+</wsdl:fault>
+<wsdl:fault name="fault2">
+<soap:fault name="fault2" use="literal"/>
+</wsdl:fault>
+<wsdl:fault name="fault3">
+<soap:fault name="fault3" use="literal"/>
+</wsdl:fault>
+<wsdl:fault name="fault4">
+<soap:fault name="fault4" use="literal"/>
+</wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="accountUpdate">
+<soap:operation soapAction="accountUpdate"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+<wsdl:fault name="fault1">
+<soap:fault name="fault1" use="literal"/>
+</wsdl:fault>
+<wsdl:fault name="fault2">
+<soap:fault name="fault2" use="literal"/>
+</wsdl:fault>
+<wsdl:fault name="fault3">
+<soap:fault name="fault3" use="literal"/>
+</wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="sendApprovalResultWithPaymentDetail">
+<soap:operation soapAction="sendApprovalResultWithPaymentDetail"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+<wsdl:fault name="fault1">
+<soap:fault name="fault1" use="literal"/>
+</wsdl:fault>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:service name="ServiceOrderManagement">
+<wsdl:port binding="tns:ServiceOrderManagement_Binding" name="ServiceOrderManagement">
+<soap:address location="http://inka-om-stb.turkcell.com.tr:80/ServiceOrderManagement/ServiceOrderManagement_v1.0"/>
+</wsdl:port>
+</wsdl:service>
+</wsdl:definitions>

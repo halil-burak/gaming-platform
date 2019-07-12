@@ -33,10 +33,5 @@ public class CmsApplication {
 		TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
 	}
 
-	@Bean
-	MeterRegistryCustomizer<MeterRegistry> metricsCommonTags() {
-		return registry -> registry.config().commonTags("application", "gamingplatform-cms");
-	}
-
 }
 

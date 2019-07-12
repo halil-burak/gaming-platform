@@ -1,7 +1,9 @@
 package com.turkcell.playcell.gamingplatform;
 
+import io.micrometer.core.instrument.MeterRegistry;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.actuate.autoconfigure.metrics.MeterRegistryCustomizer;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.integration.annotation.IntegrationComponentScan;
@@ -29,6 +31,11 @@ public class CmsApplication {
 	@PostConstruct
 	void started() {
 		TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
+	}
+
+	@Bean
+	MeterRegistryCustomizer<MeterRegistry> metricsCommonTags() {
+		return registry -> registry.config().commonTags("application", "gamingplatform-cms");
 	}
 
 }

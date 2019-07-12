@@ -11,11 +11,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.turkcell.playcell.gamingplatform.api.config.ApplicationProperties;
 import com.turkcell.playcell.gamingplatform.api.dto.GameUrlDTO;
 import com.turkcell.playcell.gamingplatform.api.enumtypes.ResponseCodeStrings;
 import com.turkcell.playcell.gamingplatform.api.response.DataResponse;
@@ -37,8 +35,6 @@ public class GameListController extends BaseController {
 	
     private final GameService gameService;
 	
-	private final ApplicationProperties applicationProperties;
-	
 	private final JWTToken JWTTokenService;
 	
 	private final MessageSource messageSource;
@@ -46,7 +42,6 @@ public class GameListController extends BaseController {
     @GetMapping("/platforms/{platformName}/games/{slug}")
     public ResponseEntity<Object> getGame(@PathVariable(name = "platformName") String platformName, @PathVariable(name = "slug") String slug, 
     								HttpServletRequest request, HttpServletResponse hresponse){
-    								//@RequestHeader(name="Accept-Language", required = false, defaultValue="tr") Locale locale) {
     	
     	try {
     		
@@ -76,7 +71,6 @@ public class GameListController extends BaseController {
 					
 				DataResponse<Object> response = DataResponse.createResponse(gameUrlDTO, true, ResponseCodeStrings.GAME_URL_NULL,
 						messageSource.getMessage("game.url.null", null, new Locale(acceptLanguage)));
-						//messageSource.getMessage("game.url.null", null, ObjectUtils.isEmpty(locale) ? applicationProperties.getLocaleLanguage() : locale));
 				return new ResponseEntity<>(response, HttpStatus.OK);
 			}
 		        

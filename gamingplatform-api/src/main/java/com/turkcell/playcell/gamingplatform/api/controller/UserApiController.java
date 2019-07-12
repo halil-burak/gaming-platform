@@ -103,17 +103,9 @@ public class UserApiController extends BaseController {
 	@PostMapping (path="/login", produces=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> login (HttpServletRequest request, HttpServletResponse hresponse, @RequestHeader HttpHeaders headers) {
 		
-		//String msisdn = super.getPhoneNumber(request);
-		
 		String msisdn = null;
 		
 		try {
-		    	
-			/*if (!super.checkMsisdnFormat(msisdn)) {
-				DataResponse<?> response = DataResponse.createResponse(null, false, ResponseCodeStrings.MSISDN_FORMAT_ERROR, "MSISDN Format Check Failed");
-				log.info("MSISDN Format Check Failed for " + msisdn);
-				return new ResponseEntity<> (response, HttpStatus.BAD_REQUEST);
-			}*/
 		    
 			String permToken = super.getAuthorizationHeader(request);
 			
@@ -151,18 +143,10 @@ public class UserApiController extends BaseController {
 
 	@GetMapping (path="/getSubscriptionInfo", produces=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> getSubscriptionInfo (HttpServletRequest request) {
-		
-		//String msisdn = super.getPhoneNumber(request);
-		
+
 		String msisdn = null;
 		
-		try {		    
-	    	
-			/*if (!super.checkMsisdnFormat(msisdn)) {
-				DataResponse<?> response = DataResponse.createResponse(null, false, ResponseCodeStrings.MSISDN_FORMAT_ERROR, "MSISDN Format Check Failed");
-				log.info("MSISDN Format Check Failed for " + msisdn);
-				return new ResponseEntity<> (response, HttpStatus.BAD_REQUEST);
-			}*/
+		try {
 		    
 			String tempToken = super.getAuthorizationHeader(request);
 			

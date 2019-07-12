@@ -22,6 +22,7 @@ public class ComplaintController {
     public ResponseEntity<Object> saveComplaint(@PathVariable(name = "platformName") String platformName, @PathVariable(name = "gameId") Long gameId, @RequestBody ComplaintDTO complaintDTO) {
         complaintService.saveComplaint(platformName, gameId, complaintDTO);
         DataResponse<Object> response = DataResponse.createResponse(null, true, ResponseCodeStrings.SUCCESS, "Complaint is successfully saved.");
+        log.info("Complaint is successfully saved.");
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 

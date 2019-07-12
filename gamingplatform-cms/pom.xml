@@ -88,6 +88,9 @@
                         <goals>
                             <goal>repackage</goal>
                         </goals>
+                        <configuration>
+                            <classifier>spring-boot</classifier>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>

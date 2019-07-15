@@ -3,8 +3,10 @@ package com.turkcell.playcell.gamingplatform.common.config;
 import java.time.Duration;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachingConfigurer;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cache.interceptor.CacheErrorHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
@@ -15,7 +17,7 @@ import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactor
 
 @EnableCaching
 @Configuration
-public class RedisConfiguration extends CachingConfigurerSupport {
+public class RedisConfiguration extends CachingConfigurerSupport implements CachingConfigurer {
 	
 	@Autowired
 	private CommonApplicationProperties applicationProperties;
@@ -68,6 +70,10 @@ public class RedisConfiguration extends CachingConfigurerSupport {
     			.build();
  	
     	return rcm;
-    }  
-    
+    }
+
+	@Override
+	public CacheErrorHandler errorHandler() {
+		return new RedisCacheErrorHandler();
+	}
 }

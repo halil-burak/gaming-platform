@@ -76,6 +76,7 @@
             <version>1.3.2</version>
         </dependency>
 
+<!--        jenkins için ekledim-->
         <dependency>
             <groupId>org.reactivestreams</groupId>
             <artifactId>reactive-streams</artifactId>

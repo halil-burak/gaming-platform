@@ -6,8 +6,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.turkcell.playcell.gamingplatform.api.config.ApplicationProperties;
@@ -37,6 +35,29 @@ public class BaseController {
 		}
 
 		return false;
+	}
+	
+	protected String checkAcceptLanguageHeader(HttpServletRequest request) {
+		
+        String acceptLang = request.getHeader("Accept-Language");
+        
+        log.info("checkAcceptLanguageHeader : " + acceptLang);
+
+        if (acceptLang != null) {
+        	
+        	if (acceptLang.contains(";")) {
+        		String [] authTokenParts = acceptLang.split(";");	
+        		acceptLang = authTokenParts[0];
+        	}
+
+        	if (acceptLang.contains("-")) {
+        		return acceptLang.substring(0, acceptLang.indexOf("-"));
+        	} else {
+        		return acceptLang;
+        	}
+        }
+
+        return applicationProperties.getLocaleLanguage().toLanguageTag();
 	}
 	
 	protected boolean checkAuthorizationHeader(HttpServletRequest request) {

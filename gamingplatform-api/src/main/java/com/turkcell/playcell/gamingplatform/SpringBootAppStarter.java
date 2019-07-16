@@ -21,9 +21,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableAutoConfiguration
 @EnableCaching
 @EnableSwagger2
-//@ComponentScan(basePackages = {"com.turkcell.playcell.*"})
-//@EntityScan("com.turkcell.playcell.gamingplatform.common.*")
-//@EnableJpaRepositories("com.turkcell.playcell.gamingplatform.api.repository")
 public class SpringBootAppStarter {  
     public static void main(String[] args) {
     	SpringApplication.run(SpringBootAppStarter.class, args);

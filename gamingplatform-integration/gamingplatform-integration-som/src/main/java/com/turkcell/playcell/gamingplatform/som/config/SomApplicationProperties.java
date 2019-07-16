@@ -25,5 +25,12 @@ public class SomApplicationProperties {
 	
 	@Value("${som.client.isturkcell.uri}")
 	private String isTurkcellUri;
+	
+	@Value("${customer.provision.api.thread.pool.corePoolSize}")
+	private Integer corePoolSize;
+	
+	@Value("${customer.provision.api.thread.pool.maxPoolSize}")
+	private Integer maxPoolSize;
+	
 
 }

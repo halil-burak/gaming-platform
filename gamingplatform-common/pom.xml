@@ -12,7 +12,6 @@
     </parent>
 
     <artifactId>gamingplatform-common</artifactId>
-    <version>1.0</version>
 
     <dependencies>
         <dependency>
@@ -48,6 +47,10 @@
         <dependency>
    			<groupId>org.springframework.cloud</groupId>
    			<artifactId>spring-cloud-starter-config</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
 		</dependency>
     </dependencies>
 

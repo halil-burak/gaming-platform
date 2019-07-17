@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <contextName>GollerCepte-API</contextName>
+    <contextName>GAMING-API</contextName>
 
     <property name="CONSOLE_LOG_PATTERN" value="%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} [%clr(%-15.15t{14}){faint}][%clr(%-5level)][%clr(%-28.28logger{0}){cyan}] - [%clr(%-8.8(${serverName:-${HOSTNAME}})){blue}] - [%clr(user:%X{user}){magenta}] %clr(:){faint} %m%n%wex"/>
     <property name="FILE_LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%-15.15t{14}][%-5level][%-25.25logger{0}] - [%-12.12(${serverName:-${HOSTNAME}})] -  [user:%X{user}] : %m%n%wex"/>
@@ -10,7 +10,6 @@
     <jmxConfigurator/>
 
     <property name="LOG_FILE_INFO" value="log/gc-api-info"/>
-    <!--<property name="LOG_FILE_DEBUG" value="log/gc-api-debug"/>-->
 
     <appender name="FILE-INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOG_FILE_INFO}.log</file>
@@ -22,29 +21,12 @@
             <!-- rollover daily -->
             <fileNamePattern>${LOG_FILE_INFO}.%d{yyyy-MM-dd}.log</fileNamePattern>
             <!-- keep 30 days' worth of history -->
-            <maxHistory>30</maxHistory>
+            <maxHistory>10</maxHistory>
         </rollingPolicy>
     </appender>
-
-    <!--<appender name="FILE-DEBUG" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
-        <!--<file>${LOG_FILE_DEBUG}.log</file>-->
-        <!--<encoder>-->
-            <!--<pattern>FILE_LOG_PATTERN</pattern>-->
-        <!--</encoder>-->
-
-        <!--<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">-->
-            <!--&lt;!&ndash; rollover daily &ndash;&gt;-->
-            <!--<fileNamePattern>${LOG_FILE_DEBUG}.%d{yyyy-MM-dd}.log</fileNamePattern>-->
-            <!--&lt;!&ndash; keep 30 days' worth of history &ndash;&gt;-->
-            <!--<maxHistory>30</maxHistory>-->
-        <!--</rollingPolicy>-->
-    <!--</appender>-->
 
     <root level="INFO" additivity="false">
         <appender-ref ref="FILE-INFO"/>
     </root>
 
-    <!--<logger name="com.turkcell.gollercepte" level="debug" additivity="false">-->
-        <!--<appender-ref ref="FILE-DEBUG" />-->
-    <!--</logger>-->
 </configuration>

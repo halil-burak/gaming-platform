@@ -6,16 +6,16 @@ import com.turkcell.playcell.gamingplatform.common.entity.Complaint;
 import com.turkcell.playcell.gamingplatform.common.entity.GameDetail;
 import com.turkcell.playcell.gamingplatform.common.repository.ComplaintRepository;
 import com.turkcell.playcell.gamingplatform.common.repository.GameDetailRepository;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class ComplaintServiceImpl implements ComplaintService {
 
-    private ComplaintRepository complaintRepository;
+    private final ComplaintRepository complaintRepository;
 
-    private GameDetailRepository gameDetailRepository;
+    private final GameDetailRepository gameDetailRepository;
 
     @Override
     public void saveComplaint(String platformName, Long gameId, ComplaintDTO complaintDTO) {

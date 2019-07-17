@@ -1,5 +1,7 @@
 package com.turkcell.playcell.gamingplatform.common.repository;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -35,4 +37,11 @@ public interface GameDetailRepository extends JpaRepository<GameDetail, Long> {
 
     @Query(value = SqlQueries.FIND_GAME_BY_PLATFORM_ID_AND_TARIFF_ID)
     List<Game> findGameByPlatformIdAndTariffId(@Param("platformId") Long platformId, @Param("tariffId") Long tariffId);
+
+    Optional<GameDetail> findByGameIdAndPlatformId(Long gameId, Long platformId);
+
+    List<GameDetail> findByPlatformIdAndGameIdIn(Long platformId, List<Long> games);
+
+    @Query("SELECT g FROM GameDetail g WHERE (:search IS NULL OR :search = '' OR lower(g.game.name) like lower(concat('%', :search,'%'))) AND g.isActive = true AND g.publishDatetime > CURRENT_TIMESTAMP")
+    Page<GameDetail> findByNameIgnoreCaseContaining(@Param("search") String search, Pageable pageable);
 }

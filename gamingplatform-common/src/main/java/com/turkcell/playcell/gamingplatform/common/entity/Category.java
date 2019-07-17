@@ -20,7 +20,7 @@ public class Category extends BaseEntity implements Serializable {
 	 */
 	private static final long serialVersionUID = 5387069816875402651L;
 
-	@NotNull @NotEmpty
+    @NotNull @NotEmpty
     @Column(name = "NAME", unique = true)
     private String name;
 

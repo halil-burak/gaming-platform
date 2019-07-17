@@ -11,7 +11,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(uniqueConstraints = @UniqueConstraint(columnNames={"NAME", "LANGUAGE_ID"}))
+@Table(uniqueConstraints = @UniqueConstraint(name="UK_CATEGORY_LANGUAGE",columnNames={"NAME", "LANGUAGE_ID"}))
 public class CategoryTranslation extends BaseEntity implements Serializable {
 
     /**

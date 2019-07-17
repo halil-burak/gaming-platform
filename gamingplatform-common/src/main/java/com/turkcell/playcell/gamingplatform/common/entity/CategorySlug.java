@@ -29,4 +29,8 @@ public class CategorySlug extends BaseEntity implements Serializable {
     @ManyToOne
     @JoinColumn(name = "CATEGORY_TRANSLATION_ID")
     private CategoryTranslation categoryTranslation;
+
+    public CategorySlug(@NotNull @NotEmpty String url) {
+        this.url = url;
+    }
 }

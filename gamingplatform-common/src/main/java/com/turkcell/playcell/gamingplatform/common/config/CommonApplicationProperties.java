@@ -17,8 +17,11 @@ public class CommonApplicationProperties {
     @Value("${spring.redis.port}")
     private Integer redisPort;
 
-    @Value("${spring.redis.password}")
-    private String redisPassword;
+    @Value("${spring.redis.testpassword}")
+    private String redisStandAlonePassword;
+    
+    @Value("${spring.redis.prodpassword}")
+    private String redisSentinelPassword;
     
     @Value("${spring.redis.sentinel.master}")
 	String sentinelMaster;

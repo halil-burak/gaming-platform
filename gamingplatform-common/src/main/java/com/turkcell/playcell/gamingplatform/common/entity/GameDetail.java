@@ -12,7 +12,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(uniqueConstraints = @UniqueConstraint(columnNames={"GAME_ID", "PLATFORM_ID"}))
+@Table(uniqueConstraints = @UniqueConstraint(name = "UK_GAME_PLATFORM",columnNames={"GAME_ID", "PLATFORM_ID"}))
 public class GameDetail extends BaseEntity implements Serializable {
 
     /**

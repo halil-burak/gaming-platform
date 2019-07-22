@@ -1,6 +1,6 @@
 package com.turkcell.playcell.gamingplatform.common.entity;
 
-import java.time.Instant;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,10 +9,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -30,16 +36,25 @@ import lombok.Setter;
 public class CustomerDetail {
 	
 	@Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="cust_detail_seq")
+	@SequenceGenerator(
+			name="cust_detail_seq",
+			sequenceName="sys_cust_det_seq",
+			allocationSize=20
+		)
     private Long id;
 	
+	@Temporal(TemporalType.TIMESTAMP)
+	@CreatedDate
 	@Column(name = "CREATE_DATE")
-    private Instant createdDate;
+    private Date createdDate;
 	
+	@Temporal(TemporalType.TIMESTAMP)
+	@LastModifiedDate
 	@Column(name = "LAST_MODIFIED_DATE")
-    private Instant lastModifiedDate;
+    private Date lastModifiedDate;
 	
-	@NotNull @NotEmpty
+	@NotNull
     @Column(name = "STATUS")
     private Boolean status;
 	
@@ -47,22 +62,22 @@ public class CustomerDetail {
     @Column(name = "MSISDN")
     private String msisdn;
 	
-	@NotNull @NotEmpty
+	@NotNull
     @Column(name = "CPCM_OFFER_ID")
-    private String cpcmOfferId;
+    private Integer cpcmOfferId;
 	
-	@NotNull @NotEmpty
+	@NotNull
     @Column(name = "PROV_SERVICE_ID")
-    private String provServiceId;
+    private Integer provServiceId;
 	
-    @PrePersist
-    protected void onCreate() {
-        this.createdDate = Instant.now();
-    }
-
     @PreUpdate
-    protected void onUpdate() {
-        this.lastModifiedDate = Instant.now();
+    @PrePersist
+    public void updateTimeStamps() {
+        Date date = new Date();
+        lastModifiedDate = date;
+        if (createdDate == null) {
+        	createdDate = date;
+        }
     }
 
 }

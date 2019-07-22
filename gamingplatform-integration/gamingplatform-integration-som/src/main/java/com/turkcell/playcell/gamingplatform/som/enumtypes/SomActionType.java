@@ -8,7 +8,10 @@ import java.math.BigInteger;
 @RequiredArgsConstructor
 public enum SomActionType {
 
-	CREATE(new BigInteger("1"));
+	// PACKAGE CREATE ORDER ACTION TYPE
+	CREATE(new BigInteger("1")),
+	// PACKAGE CANCEL ORDER ACTION TYPE
+	CANCEL(new BigInteger("4"));
 	
     @Getter
     private final BigInteger value;

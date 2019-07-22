@@ -11,7 +11,7 @@ import java.io.Serializable;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(uniqueConstraints={@UniqueConstraint(columnNames = {"URL" , "PLATFORM_ID", "LANGUAGE_ID"})})
+@Table(uniqueConstraints={@UniqueConstraint(name = "UK_GAME_SLUG", columnNames = {"URL" , "PLATFORM_ID", "LANGUAGE_ID"})})
 public class GameSlug extends BaseEntity implements Serializable {
 
     /**
@@ -33,6 +33,10 @@ public class GameSlug extends BaseEntity implements Serializable {
     private Long platformId;
     @Column(name = "LANGUAGE_ID")
     private Long languageId;
+
+    public GameSlug(@NotNull @NotEmpty String url) {
+        this.url = url;
+    }
 
     public void setGameDetailTranslation(GameDetailTranslation gameDetailTranslation) {
         this.gameDetailTranslation = gameDetailTranslation;

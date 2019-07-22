@@ -26,7 +26,10 @@ public class Platform extends BaseEntity {
     @ManyToMany(mappedBy = "platforms")
     List<Category> categories = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "platforms")
+    @ManyToMany
+    @JoinTable(name = "PLATFORM_LANGUAGE",
+            joinColumns = @JoinColumn(name = "PLATFORM_ID"),
+            inverseJoinColumns = @JoinColumn(name = "LANGUAGE_ID"))
     List<Language> languages = new ArrayList<>();
 
     @ManyToOne

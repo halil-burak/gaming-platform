@@ -39,7 +39,9 @@ public class SubscriptionInfoService {
 	}
 	
 	private String requestSubscriptionInfo(String phoneNumber, String token) {
+		
 		try {
+			
 			if (ObjectUtils.isEmpty(phoneNumber)) {
 				log.error("requestSubscriptionInfo: phone number field is empty !!");
 				return null;

@@ -50,7 +50,7 @@ public class FtpAccount extends BaseEntity {
     @JoinColumn(name = "FTP_ACCOUNT_ID")
     private List<Game> games = new ArrayList<>();
 
-    FtpAccount(Long id) {
+    public FtpAccount(Long id) {
         super.setId(id);
     }
 

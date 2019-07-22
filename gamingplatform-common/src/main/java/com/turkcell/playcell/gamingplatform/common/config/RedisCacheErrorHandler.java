@@ -1,13 +1,12 @@
 package com.turkcell.playcell.gamingplatform.common.config;
 
 import io.lettuce.core.RedisCommandTimeoutException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.Cache;
 import org.springframework.cache.interceptor.CacheErrorHandler;
 
+@Slf4j
 public class RedisCacheErrorHandler implements CacheErrorHandler {
-    private static final Logger log = LoggerFactory.getLogger(RedisCacheErrorHandler.class);
 
     @Override
     public void handleCacheGetError(RuntimeException e, Cache cache, Object o) {

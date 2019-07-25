@@ -22,17 +22,15 @@ public class User extends BaseEntity implements Serializable {
 	@Column(name = "USERNAME", unique = true)
     private String username;
 
-    @Column(name = "PASSWORD")
-    private String password ;
-
     @Column(name = "ROLE")
     private Integer role;
 
-    @Column(name = "ACTIVATION")
-    private Boolean isactive;
-
     @Column(name = "TOKEN")
     private String token;
+
+    public User(String username){
+        this.username = username;
+    }
 }
 
 

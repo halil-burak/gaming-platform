@@ -18,6 +18,15 @@ public class ApplicationProperties {
     @Value("${spring.servlet.multipart.location}")
     private String tmpFolder;
 
+    @Value("${turkcell.ldap.url}")
+    private String ldapUrl;
+
+    @Value("${turkcell.ldap.managerDn}")
+    private String ldapManagerDn;
+
+    @Value("${turkcell.ldap..managerPassword}")
+    private String ldapManagerPassword;
+
     public int getDefaultPageSize() {
         return defaultPageSize;
     }
@@ -32,5 +41,17 @@ public class ApplicationProperties {
 
     public String getTmpFolder() {
         return tmpFolder;
+    }
+
+    public String getLdapUrl() {
+        return ldapUrl;
+    }
+
+    public String getLdapManagerDn() {
+        return ldapManagerDn;
+    }
+
+    public String getLdapManagerPassword() {
+        return ldapManagerPassword;
     }
 }

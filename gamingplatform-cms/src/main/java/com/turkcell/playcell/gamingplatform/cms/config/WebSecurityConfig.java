@@ -59,8 +59,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.ldapAuthentication()
-                .userDnPatterns("uid={0},ou=SpecialUsers")
-                .groupSearchBase("ou=SpecialUsers")
+                .userSearchFilter("uid={0}")
                 .contextSource()
                 .url(applicationProperties.getLdapUrl())
                 .managerDn(applicationProperties.getLdapManagerDn())

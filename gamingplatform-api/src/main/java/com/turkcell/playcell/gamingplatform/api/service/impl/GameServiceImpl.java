@@ -50,7 +50,7 @@ public class GameServiceImpl implements GameService {
     @Autowired
     private ApplicationProperties applicationProperties;
 
-    @Cacheable(value = "games", key = "{ #platformName, #language }")
+    @Cacheable(value = "games", key = "{ #platformName, #language }", unless="#result == null")
     public GameResponse getGamesByPlatformAndLanguage(String platformName, String language) {
 
         Instant datetime = Instant.now();
@@ -162,7 +162,7 @@ public class GameServiceImpl implements GameService {
         return response;
     }
 
-    @Cacheable(value = "game", key = "{#platformName, #slug, #userTariff, #language}")
+    @Cacheable(value = "game", key = "{#platformName, #slug, #userTariff, #language}", unless="#result == null")
     public GameUrlDTO getGame(String userTariff, String platformName, String slug, String language) {
     	
     	try {

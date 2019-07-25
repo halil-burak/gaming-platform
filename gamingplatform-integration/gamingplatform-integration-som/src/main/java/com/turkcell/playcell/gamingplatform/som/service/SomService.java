@@ -63,7 +63,7 @@ public class SomService extends WebServiceGatewaySupport  {
 	@WsAudit
     public SomCreateOrderResponse createOrder(SomCreateOrderRequest somOrderRequest) throws SomServiceException {
 		
-		log.debug("SomService : createOrder called ..");
+		log.info("SomService : createOrder called for " + somOrderRequest.getMsisdn() + " - " + somOrderRequest.getOfferId());
 
         CreateOrderRequest request = createOrderRequest(somOrderRequest, false);
         

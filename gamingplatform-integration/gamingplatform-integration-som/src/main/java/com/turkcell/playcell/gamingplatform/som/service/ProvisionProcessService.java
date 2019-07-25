@@ -3,8 +3,10 @@ package com.turkcell.playcell.gamingplatform.som.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.turkcell.playcell.gamingplatform.common.entity.CustomerDetail;
 import com.turkcell.playcell.gamingplatform.common.repository.CustomerDetailRepository;
@@ -15,8 +17,7 @@ import com.turkcell.playcell.gamingplatfrom.som.dto.CustomerDetailDTO;
 @RequiredArgsConstructor
 public class ProvisionProcessService {
 	
-	@Autowired
-	private CustomerDetailRepository customerDetailRepository;
+	private final CustomerDetailRepository customerDetailRepository;
 	
 	private void setNewMsisdnCustomerDetail(String msisdn, Integer offerId, String newMsisdn) {
 		CustomerDetail cutomerDetailEntity = customerDetailRepository.findCustomerDetail(msisdn, offerId);
@@ -33,23 +34,28 @@ public class ProvisionProcessService {
         log.info("setActiveCustomerDetailStatus : msisdn {}, offerId {} Customer set inactive.", msisdn, offerId);
 	}
 	
-	private void setInactiveCustomerDetailStatus(String msisdn, Integer offerId) {		
+	private void setInactiveCustomerDetailStatus(String msisdn, Integer offerId) {
         CustomerDetail cutomerDetailEntity = customerDetailRepository.findCustomerDetail(msisdn, offerId);
         cutomerDetailEntity.setStatus(false);
         customerDetailRepository.save(cutomerDetailEntity);
         log.info("setInactiveCustomerDetailStatus : msisdn {}, offerId {} Customer set inactive.", msisdn, offerId);
 	}
 	
-	
+	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public void createSubscription(CustomerDetailDTO customerDetailDTO) {
 		
-		CustomerDetail customerDetail = CustomerDetail.builder().cpcmOfferId(customerDetailDTO.getCpcmOfferId())
-				.msisdn(customerDetailDTO.getMsisdn())
-				.provServiceId(customerDetailDTO.getProvServiceId())
-				.status(true)
-				.build();
-		
-		customerDetailRepository.save(customerDetail);
+		try {
+			CustomerDetail customerDetail = CustomerDetail.builder().cpcmOfferId(customerDetailDTO.getCpcmOfferId())
+					.msisdn(customerDetailDTO.getMsisdn())
+					.provServiceId(customerDetailDTO.getProvServiceId())
+					.status(true)
+					.build();
+			
+			customerDetailRepository.save(customerDetail);
+			customerDetailRepository.flush();
+		} catch (Exception ex) {
+			log.error(ExceptionUtils.getStackTrace(ex));
+		}
         
     }
 

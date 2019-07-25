@@ -34,13 +34,12 @@ public class GenericProvisioningEndpoint {
 
         TSOresult tsoResult = new TSOresult();
         GenericProvisioningServiceResponse response = tsoConverter.convertTSODATAToGPServiceRequest(tsodata);
-
         customerProvisionService.insertCustomerProvisionRecord(response);
-
         tsoResult.setErrorCode("0");
-        tsoResult.setStatusCode("Status:" + response.getWorkflowType().getValue() + " success process.");
+        tsoResult.setStatusCode("Status: SUCCESS " + response.getWorkflowType().getValue() + " provision processed.");
         
-        log.debug("GenericProvisioningEndpoint : generic provision request is responded.");
+        log.info("GenericProvisioningEndpoint:TSO_DATA -> generic provision request " + response.getMsisdn() + " - " + 
+        		response.getWorkflowType().getValue() + " is responded.");
         
         return  tsoResult;
     }

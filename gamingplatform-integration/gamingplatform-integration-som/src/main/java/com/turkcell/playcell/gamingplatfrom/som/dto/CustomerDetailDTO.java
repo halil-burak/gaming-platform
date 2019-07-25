@@ -13,9 +13,9 @@ import lombok.Setter;
 @AllArgsConstructor
 public class CustomerDetailDTO {
 
-    private String msisdn;
+    private String 	msisdn;
     private Integer cpcmOfferId;
     private Integer provServiceId;
-    private String oldMsisdn;
+    private String 	oldMsisdn;
     
 }

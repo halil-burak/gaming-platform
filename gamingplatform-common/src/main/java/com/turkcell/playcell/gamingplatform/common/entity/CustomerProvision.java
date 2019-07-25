@@ -39,12 +39,12 @@ import lombok.Setter;
 public class CustomerProvision {
 	
 	@Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="cust_provision_seq")
-	@SequenceGenerator(
+    @GeneratedValue(strategy = GenerationType.SEQUENCE/*, generator="cust_provision_seq"*/)
+	/*@SequenceGenerator(
 			name="cust_provision_seq",
 			sequenceName="sys_cust_prov_seq",
 			allocationSize=20
-		)
+		)*/
     private Long id;
 	
 	@Temporal(TemporalType.TIMESTAMP)

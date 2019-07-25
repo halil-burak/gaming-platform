@@ -4,40 +4,29 @@ import java.time.Duration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
-import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisSentinelConfiguration;
-import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 
-@EnableCaching
 @Configuration
-public class RedisConfiguration extends CachingConfigurerSupport {
+@Profile("redis-sentinel")
+public class RedisSentinelConfig extends CachingConfigurerSupport {
 	
 	@Autowired
 	private CommonApplicationProperties applicationProperties;
 
     @Bean
     public LettuceConnectionFactory redisConnectionFactory() {
-    	  	
-    	// REDIS STANDALONE CONFING FOR TEST ENV
-    	/*RedisStandaloneConfiguration redisConf = new RedisStandaloneConfiguration();
     	
-    	redisConf.setHostName(applicationProperties.getRedisHost());
-    	redisConf.setPort(applicationProperties.getRedisPort());
-    	redisConf.setPassword(RedisPassword.of(applicationProperties.getRedisPassword()));
-        
-    	return new LettuceConnectionFactory(redisConf);*/
-    	
-    	// REDIS SENTINEL CONFIG FOR PROD ENV
 		RedisSentinelConfiguration sentinelConfig = new RedisSentinelConfiguration(applicationProperties.getSentinelMaster(), 
 				applicationProperties.getSentinelNodes());
 		
-		sentinelConfig.setPassword(applicationProperties.getRedisPassword());
+		sentinelConfig.setPassword(applicationProperties.getRedisSentinelPassword());
 
 		return new LettuceConnectionFactory(sentinelConfig);
     }
@@ -47,7 +36,7 @@ public class RedisConfiguration extends CachingConfigurerSupport {
 		RedisSentinelConfiguration sentinelConfig = new RedisSentinelConfiguration(applicationProperties.getSentinelMaster(), 
 				applicationProperties.getSentinelNodes());
 
-		sentinelConfig.setPassword(applicationProperties.getRedisPassword());
+		sentinelConfig.setPassword(applicationProperties.getRedisSentinelPassword());
 
 		return new JedisConnectionFactory(sentinelConfig);
 	}

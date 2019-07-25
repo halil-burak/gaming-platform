@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.turkcell.playcell.gamingplatform.common.entity.CustomerProvision;
-import com.turkcell.playcell.gamingplatform.common.entity.CustomerProvision.CustomerProvisionBuilder;
 import com.turkcell.playcell.gamingplatform.common.enums.StatusTypes;
 import com.turkcell.playcell.gamingplatform.common.repository.CustomerProvisionRepository;
 import com.turkcell.playcell.gamingplatform.som.model.GenericProvisioningServiceResponse;
@@ -22,7 +21,6 @@ import lombok.extern.slf4j.Slf4j;
 @Transactional
 public class CustomerProvisionService {
 	
-	
 	private final CustomerProvisionRepository customerProvisionRepository;
 	
 	private final ProvisionProcessService provisionProcessService;
@@ -33,17 +31,18 @@ public class CustomerProvisionService {
         
         try {
         	
-        	CustomerProvisionBuilder provision = CustomerProvision.builder()
+        	CustomerProvision prov = CustomerProvision.builder()
         			.msisdn(response.getMsisdn())
         			.cpcpmOfferId(Integer.parseInt(response.getCpcmOfferId()))
         			.workflowLabel(response.getWorkflowType().getValue())
         			.provServiceId(Integer.parseInt(response.getSdpDetailValue()))
-        			.processStatus(StatusTypes.READY_TO_PROCESS);
+        			.oldMsisdn(response.getOldMsisdn())
+        			.processStatus(StatusTypes.READY_TO_PROCESS).build();
         			
-        	customerProvisionRepository.save(provision.build());
+        	customerProvisionRepository.save(prov);
 
         } catch (Exception ex) {
-            log.error(ex.getMessage());
+            log.error(ExceptionUtils.getStackTrace(ex));
         }
 		
 	}
@@ -77,11 +76,22 @@ public class CustomerProvisionService {
 		return customerProvisionEntity;
 	}
 	
+	public boolean setProvisionStatusDone(Long provId) {
+		
+		final CustomerProvision customerProvisionEntity = customerProvisionRepository.findById(provId).get();
+		customerProvisionEntity.setProcessStatus(StatusTypes.DONE);
+
+		if (customerProvisionRepository.save(customerProvisionEntity) != null) {
+			log.debug("processCustomerProvisionRecord : CustomerProvision record is updated to DONE.");
+			return true;
+		}
+		
+		return false;
+	}
+	
 	public void processCustomerProvisionRecord(CustomerProvision customerProvision) {
 		
 		log.debug("Executing CustomerProvisionEntity, id: {}, status: {} ", customerProvision.getId(), customerProvision.getProcessStatus());
-		
-		try {
 			
 			CustomerDetailDTO customerDto = CustomerDetailDTO.builder().cpcmOfferId(customerProvision.getCpcpmOfferId())
 					.msisdn(customerProvision.getMsisdn())
@@ -121,22 +131,7 @@ public class CustomerProvisionService {
 			default:
 				log.error("Invalid WorkFlowLabel is received {} for msisdn: {}", customerProvision.getWorkflowLabel(), customerProvision.getMsisdn());
 				break;
-		}
-			
-		int updatedRowCount = customerProvisionRepository.setDoneStatustoEntity(
-					customerProvision.getId(),
-					StatusTypes.DONE.getValue(),
-					new Date());
-
-		if (updatedRowCount > 0) {
-			log.debug("processCustomerProvisionRecord : CustomerProvision record is updated to DONE.");
-		}
-		
-			
-		} catch (Exception ex) {
-			log.error(ExceptionUtils.getStackTrace(ex));
-		}
-		
+			}
 	}
 
 }

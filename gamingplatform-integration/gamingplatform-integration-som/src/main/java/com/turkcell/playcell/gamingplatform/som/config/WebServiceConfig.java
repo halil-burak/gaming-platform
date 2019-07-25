@@ -29,7 +29,7 @@ public class WebServiceConfig {
         return new ServletRegistrationBean<>(servlet, "/ws/*");
     }
 
-    @Bean(name ="generic-provisioning")
+    @Bean(name = "generic-provisioning")
     public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema genericProvisioningSchema) {
         DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
         wsdl11Definition.setPortTypeName("GenericProvisioningPort");

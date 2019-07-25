@@ -13,7 +13,7 @@ public class UUIDUtil {
     public static String getRandomIdWithLength(final int length){
         String uuid = UUID.randomUUID().toString().replaceAll("-", "");
         if(uuid.length()< length ){
-            throw  new RuntimeException("UUIDUtil: length must be smaller than " + uuid.length());
+            throw new RuntimeException("UUIDUtil: length must be smaller than " + uuid.length());
         }
         return uuid.substring(0,length);
 

@@ -30,7 +30,7 @@ public class CustomerProvisionFixedDelayTask {
 		this.isShuttingDown = true;
 	}
 
-	@Scheduled(fixedDelay = 5000)
+	@Scheduled(fixedDelay = 15000)
 	public void execute() {
 		
 		if (this.isShuttingDown) {
@@ -46,7 +46,7 @@ public class CustomerProvisionFixedDelayTask {
 		
 		while (! this.isShuttingDown && customerProvisionApiThreadPoolTaskExecutor.getActiveCount() < customerProvisionApiThreadPoolTaskExecutor.getMaxPoolSize()) {
 			
-			log.info("CustomerProvisionFixedDelayTask -> execute");
+			log.debug("CustomerProvisionFixedDelayTask -> execute");
 			final CustomerProvision customerProvisionEntity = customerProvisionService.tryToLockNextEntityForProcessing();
 
 			if (customerProvisionEntity == null) {
@@ -55,13 +55,18 @@ public class CustomerProvisionFixedDelayTask {
 			}
 
 			customerProvisionApiThreadPoolTaskExecutor.execute(new Runnable() {
+				
 				@Override
-				public void run() {					
-					log.debug("CustomerProvisionFixedDelayTask -> customerProvisionApiThreadPoolTaskExecutor -> execute");
+				public void run() {	
+					log.debug("CustomerProvisionFixedDelayTask:customerProvisionApiThreadPoolTaskExecutor -> execute");
 					customerProvisionService.processCustomerProvisionRecord(customerProvisionEntity);
-					log.debug("CustomerProvisionFixedDelayTask: exetecuted processCustomerProvisionRecord");
 				}
+				
 			});
+			
+			if (!customerProvisionService.setProvisionStatusDone(customerProvisionEntity.getId())) {
+				log.error("Process status failed to set DONE !!");
+			}
 
 		}
 		

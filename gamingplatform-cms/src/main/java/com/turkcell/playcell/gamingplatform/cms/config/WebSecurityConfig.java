@@ -1,20 +1,19 @@
 package com.turkcell.playcell.gamingplatform.cms.config;
 
+import com.turkcell.playcell.gamingplatform.cms.ApplicationProperties;
 import com.turkcell.playcell.gamingplatform.cms.security.JwtTokenFilter;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
@@ -22,11 +21,14 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private JwtTokenFilter jwtTokenFilter;
+    private  JwtTokenFilter jwtTokenFilter;
+
+    private ApplicationProperties applicationProperties;
 
     @Autowired
-    public WebSecurityConfig(@Lazy JwtTokenFilter jwtTokenFilter) {
+    public WebSecurityConfig(@Lazy JwtTokenFilter jwtTokenFilter, ApplicationProperties applicationProperties ) {
         this.jwtTokenFilter = jwtTokenFilter;
+        this.applicationProperties = applicationProperties;
     }
 
     @Override
@@ -54,9 +56,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     }
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(12);
+    @Override
+    public void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.ldapAuthentication()
+                .userDnPatterns("uid={0},ou=SpecialUsers")
+                .groupSearchBase("ou=SpecialUsers")
+                .contextSource()
+                .url(applicationProperties.getLdapUrl())
+                .managerDn(applicationProperties.getLdapManagerDn())
+                .managerPassword(applicationProperties.getLdapManagerPassword())
+                .and()
+                .passwordCompare()
+                .passwordAttribute("userPassword");
     }
 
     @Bean

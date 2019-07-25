@@ -68,8 +68,11 @@ public class GameServiceImpl implements GameService {
             List<Long> languagesOfPlatform = languageRepository.findIDsByPlatformsId(platformId);
             gameDetail.getGameDetailTranslations().addAll(gameCreateDTO.getTranslations().stream().filter(translationDTO -> languagesOfPlatform.contains(translationDTO.getLanguageId()))
                     .map(translationDTO -> {
-                        GameDetailTranslation gameDetailTranslation = modelMapper.map(translationDTO, GameDetailTranslation.class);
+                        GameDetailTranslation gameDetailTranslation = new GameDetailTranslation();
                         gameDetailTranslation.setGameDetail(gameDetail);
+                        gameDetailTranslation.setLanguage(new Language(translationDTO.getLanguageId()));
+                        gameDetailTranslation.setDescription(translationDTO.getDescription());
+                        gameDetailTranslation.setName(translationDTO.getName());
                         gameDetailTranslation.getGameSlugs().addAll(translationDTO.getGameSlugs().stream().map(s -> {
                            GameSlug gameSlug = new GameSlug(StringUtils.replaceTurkishChars(s));
                            gameSlug.setGameDetailTranslation(gameDetailTranslation);
